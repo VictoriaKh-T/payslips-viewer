@@ -3,6 +3,7 @@ plugins {
     id("application")
     id("org.springframework.boot") version "3.2.4"
     id("io.spring.dependency-management") version "1.1.4"
+    id("com.diffplug.spotless") version "6.11.0"
 }
 
 val springAiVersion = "1.0.0-M2"
@@ -45,6 +46,17 @@ dependencies {
     // JUnit for testing
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+}
+
+spotless {
+    java {
+        target("**/*.java")
+        googleJavaFormat() // або інші правила форматування
+    }
+    format("misc") {
+        target("**/*.gradle", "**/*.md", "**/*.properties", "**/*.yml", "**/*.yaml")
+        indentWithSpaces(4)
+    }
 }
 
 tasks.test {
