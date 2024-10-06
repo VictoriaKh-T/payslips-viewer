@@ -1,0 +1,20 @@
+@startuml
+'https://plantuml.com/ie-diagram
+
+entity "payslip" as ps {
+* PK: id: varchar
+--
+* name: varchar
+--
+* FK: employee_id: varchar
+}
+
+entity "employee" as empl {
+* PK: id: varchar
+--
+* full name: varchar
+......
+}
+
+ps ||--|| empl
+@enduml

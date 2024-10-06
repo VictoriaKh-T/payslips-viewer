@@ -1,0 +1,58 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.springframework.boot' version "3.2.4"
+    id 'io.spring.dependency-management' version "1.1.4"
+}
+
+ext {
+    springAiVersion = "1.0.0-M2" // Check if this version is available
+    springDocVersion = "2.2.0"    // Check if this version is available
+}
+
+group = 'com.payslip'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+java.sourceCompatibility = JavaVersion.VERSION_17
+java.targetCompatibility = JavaVersion.VERSION_17
+
+dependencies {
+    // Spring Boot dependencies
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web:'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springdoc:springdoc-openapi-ui:1.8.0'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+
+    // db
+    runtimeOnly 'org.postgresql:postgresql'
+
+
+    // Lombok dependencies
+    compileOnly 'org.projectlombok:lombok:1.18.28'
+    annotationProcessor 'org.projectlombok:lombok:1.18.28'
+
+    // MapStruct dependencies
+    implementation 'org.mapstruct:mapstruct:1.6.2'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.2'
+
+    // Jakarta dependencies
+    implementation 'jakarta.annotation:jakarta.annotation-api:3.0.0'
+    implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
+    implementation 'jakarta.json.bind:jakarta.json.bind-api:3.0.1'
+    implementation 'jakarta.persistence:jakarta.persistence-api:3.1.0'
+
+    // JUnit for testing
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+
+
+tasks.test {
+    useJUnitPlatform()
+}

@@ -1,0 +1,18 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor "PersonService" as US
+participant "Person Service" as S
+database "Persons" as U
+
+' Create New Person
+US -> S: CreatePersonRequest
+
+S-> S: validate data
+S-> U: create person
+
+U -> S: person
+
+S -> US: CreatePersonResponse
+
+@enduml

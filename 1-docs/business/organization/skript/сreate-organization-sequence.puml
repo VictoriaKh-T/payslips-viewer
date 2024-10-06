@@ -1,0 +1,20 @@
+@startuml
+
+' Actor
+actor "OrganizationService" as OS
+participant "Organization Service" as S
+database "Organization" as O
+
+
+' Create New Organization
+OS -> S: CreateOrganizationRequest
+S -> O: find organization
+
+S-> S: validate data
+S-> O: create organization
+
+O -> S:organization
+
+S -> OS: CreateOrganizationResponse
+
+@enduml

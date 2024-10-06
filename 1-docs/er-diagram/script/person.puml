@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/ie-diagram
+
+entity "person" as u {
+* PK: id: varchar
+--
+* email: varchar
+* first name: varchar
+* second name: varchar
+* surname: varchar
+* data_birth: data
+}
+
+@enduml

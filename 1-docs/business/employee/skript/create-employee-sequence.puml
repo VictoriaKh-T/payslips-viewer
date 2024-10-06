@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor "EmployeeService" as ES
+participant "Employee Service" as S
+participant "Person Service" as U
+database "Employee" as E
+
+
+' Create New Employee
+ES -> S: CreateEmployeeRequest
+S -> U: find person
+U -> S: person
+
+S-> S: validate data
+S-> E: create employee
+
+E -> S: employee
+
+S -> ES: CreateEmployeeResponse
+@enduml

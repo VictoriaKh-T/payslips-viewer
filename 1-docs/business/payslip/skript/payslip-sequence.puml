@@ -1,0 +1,15 @@
+@startuml
+
+actor "PayslipService" as PS
+participant "Payslip Service" as S
+database "Payslip" as P
+
+' Payslips
+PS -> S: PayslipRequest
+S -> P: find payslip
+S-> S: validate data
+
+S-> P: create payslip
+P-> PS: PayslipResponse
+
+@enduml
