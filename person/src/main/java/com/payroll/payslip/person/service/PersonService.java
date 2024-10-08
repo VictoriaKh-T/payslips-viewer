@@ -1,12 +1,13 @@
 package com.payroll.payslip.person.service;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import com.payroll.payslip.person.model.dto.CreatePersonRequest;
 import com.payroll.payslip.person.model.dto.CreatePersonResponse;
 import com.payroll.payslip.person.model.dto.PersonResponse;
 import com.payroll.payslip.person.model.dto.UpdatePersonRequest;
 import com.payroll.payslip.person.model.dto.UpdatePersonResponse;
-import java.time.LocalDate;
-import java.util.List;
 
 public interface PersonService {
   CreatePersonResponse createPerson(CreatePersonRequest request);

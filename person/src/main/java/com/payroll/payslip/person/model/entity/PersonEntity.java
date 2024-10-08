@@ -1,13 +1,15 @@
 package com.payroll.payslip.person.model.entity;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
-import java.time.LocalDate;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 

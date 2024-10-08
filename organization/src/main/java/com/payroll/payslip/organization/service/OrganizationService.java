@@ -1,8 +1,8 @@
 package com.payroll.payslip.organization.service;
 
+import java.util.List;
 
 import com.payroll.payslip.organization.model.dto.*;
-import java.util.List;
 
 public interface OrganizationService {
   OrganizationResponse createOrganization(OrganizationRequest organization);
