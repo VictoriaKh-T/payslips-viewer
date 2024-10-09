@@ -10,17 +10,17 @@ import com.payroll.payslip.person.model.dto.UpdatePersonRequest;
 import com.payroll.payslip.person.model.dto.UpdatePersonResponse;
 
 public interface PersonService {
-  CreatePersonResponse createPerson(CreatePersonRequest request);
+    CreatePersonResponse createPerson(CreatePersonRequest request);
 
-  UpdatePersonResponse updatePerson(Long id, UpdatePersonRequest request);
+    UpdatePersonResponse updatePerson(Long id, UpdatePersonRequest request);
 
-  void deletePersonById(Long id);
+    void deletePersonById(Long id);
 
-  PersonResponse findPersonByBirth(LocalDate date);
+    PersonResponse findPersonByBirth(LocalDate date);
 
-  PersonResponse findPersonById(Long id);
+    PersonResponse findPersonById(Long id);
 
-  PersonResponse findPersonByEmail(String email);
+    PersonResponse findPersonByEmail(String email);
 
-  List<PersonResponse> findAllPersons();
+    List<PersonResponse> findAllPersons();
 }
