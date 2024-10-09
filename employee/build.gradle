@@ -3,24 +3,16 @@ plugins {
     id 'application'
     id 'org.springframework.boot' version '3.2.4'
     id 'io.spring.dependency-management' version '1.1.4'
-    id 'checkstyle'
     id 'com.diffplug.spotless' version '6.11.0'
 }
 
 repositories {
     mavenCentral()
-    google()
-    gradlePluginPortal()
 }
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
-}
-
-checkstyle {
-    toolVersion = '10.12.1'
-    configFile = file("${project.rootDir}/config/checkstyle/checkstyle.xml")
 }
 
 dependencies {
@@ -52,18 +44,13 @@ dependencies {
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 
-    checkstyle "com.puppycrawl.tools:checkstyle:${checkstyle.toolVersion}"
+    // https://mvnrepository.com/artifact/com.google.googlejavaformat/google-java-format
+    implementation("com.google.googlejavaformat:google-java-format:1.24.0")
+
 }
 
 tasks.test {
     useJUnitPlatform()
-}
-
-tasks.withType(Checkstyle) {
-    reports {
-        xml.required = false
-        html.required = true
-    }
 }
 
 tasks.register('checkCodeCleanliness') {
@@ -81,18 +68,14 @@ tasks.named('spotlessApply') {
 
 spotless {
     java {
-        googleJavaFormat()
+        googleJavaFormat('1.24.0')
+
+        importOrder('java', 'javax', '', 'org', 'com')
         removeUnusedImports()
         trimTrailingWhitespace()
         indentWithSpaces(4)
         endWithNewline()
-        // Checkstyle
-        checkstyle {
-            configFile = file("${project.rootDir}/config/checkstyle/checkstyle.xml")
-        }
 
         target 'src/main/java/**/*.java', 'src/test/java/**/*.java'
     }
 }
-
-

@@ -9,8 +9,6 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/2-lib" />
-            <option value="$PROJECT_DIR$/2-lib/addition-annotation" />
             <option value="$PROJECT_DIR$/employee" />
             <option value="$PROJECT_DIR$/organization" />
             <option value="$PROJECT_DIR$/person" />

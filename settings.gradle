@@ -2,7 +2,4 @@ rootProject.name = "payslip"
 include("person")
 include("organization")
 include("employee")
-include ("2-lib")
-include '2-lib:addition-annotation'
-findProject(':2-lib:addition-annotation')?.name = 'addition-annotation'
 

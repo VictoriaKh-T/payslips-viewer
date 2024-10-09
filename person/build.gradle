@@ -1,36 +1,38 @@
 plugins {
     id 'java'
     id 'application'
-    id 'org.springframework.boot' version "3.2.4"
-    id 'io.spring.dependency-management' version "1.1.4"
+    id 'org.springframework.boot' version '3.2.4'
+    id 'io.spring.dependency-management' version '1.1.4'
+    id 'com.diffplug.spotless' version '6.11.0'
+    id 'checkstyle'
 }
-
-ext {
-    springAiVersion = "1.0.0-M2" // Check if this version is available
-    springDocVersion = "2.2.0"    // Check if this version is available
-}
-
-group = 'com.payslip'
-version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    google()
+    gradlePluginPortal()
 }
 
-java.sourceCompatibility = JavaVersion.VERSION_17
-java.targetCompatibility = JavaVersion.VERSION_17
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+checkstyle {
+    toolVersion = '10.12.1'
+    configFile = file("${project.rootDir}/config/checkstyle/checkstyle.xml")
+}
 
 dependencies {
     // Spring Boot dependencies
     implementation 'org.springframework.boot:spring-boot-starter'
-    implementation 'org.springframework.boot:spring-boot-starter-web:'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springdoc:springdoc-openapi-ui:1.8.0'
+    implementation "org.springdoc:springdoc-openapi-ui:1.8.0"
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 
     // db
     runtimeOnly 'org.postgresql:postgresql'
-
 
     // Lombok dependencies
     compileOnly 'org.projectlombok:lombok:1.18.28'
@@ -49,10 +51,49 @@ dependencies {
     // JUnit for testing
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+
+    checkstyle "com.puppycrawl.tools:checkstyle:${checkstyle.toolVersion}"
 }
-
-
 
 tasks.test {
     useJUnitPlatform()
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        xml.required = false
+        html.required = true
+    }
+}
+
+tasks.register('checkCodeCleanliness') {
+    dependsOn 'spotlessCheck'
+    doLast {
+        println 'Code Cleanliness Check Complete'
+    }
+}
+
+tasks.named('spotlessApply') {
+    doLast {
+        println 'Code Cleanliness Applied'
+    }
+}
+
+spotless {
+    java {
+        palantirJavaFormat()
+
+        importOrder('java', 'javax', '', 'org', 'com')
+        removeUnusedImports()
+        trimTrailingWhitespace()
+        indentWithSpaces(4)
+        endWithNewline()
+
+        // Checkstyle
+        checkstyle {
+            configFile = file("${project.rootDir}/config/checkstyle/checkstyle.xml")
+        }
+
+        target 'src/main/java/**/*.java', 'src/test/java/**/*.java'
+    }
 }
