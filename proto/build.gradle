@@ -1,19 +1,68 @@
 plugins {
     id 'java'
+    id 'application'
+    id 'com.google.protobuf' version '0.9.4'
 }
 
 group = 'com.payslip'
 version = '0.0.1-SNAPSHOT'
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+def protobufJavaVersion = "3.22.2"
+def protocGenGrpcJava = "1.55.1"
+
 repositories {
     mavenCentral()
+    google()
+    gradlePluginPortal()
 }
 
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation 'io.grpc:grpc-netty-shaded:1.68.0'
+    implementation 'io.grpc:grpc-protobuf:1.68.0'
+    implementation 'io.grpc:grpc-stub:1.68.0'
 }
 
-test {
-    useJUnitPlatform()
+def protoSrcDir = 'build/generated/sources/proto/main/java'
+def grpcSrcDir = 'build/generated/sources/proto/main/grpc'
+
+sourceSets {
+    main {
+        java {
+            srcDirs += file(protoSrcDir)
+            srcDirs += file(grpcSrcDir)
+        }
+    }
+}
+
+
+sourceSets {
+    main {
+        proto {
+            srcDir protoSrcDir
+        }
+        java {
+            srcDir grpcSrcDir
+        }
+    }
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:${protobufJavaVersion}"
+    }
+    plugins {
+        grpc {
+            artifact = "io.grpc:protoc-gen-grpc-java:${protocGenGrpcJava}"
+        }
+    }
+    generateProtoTasks {
+        all()*.plugins {
+            grpc {}
+        }
+    }
 }

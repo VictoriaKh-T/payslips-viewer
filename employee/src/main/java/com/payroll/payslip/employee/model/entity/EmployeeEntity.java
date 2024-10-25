@@ -1,5 +1,7 @@
 package com.payroll.payslip.employee.model.entity;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,9 +11,9 @@ import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
-import java.time.LocalDate;
 
 @Entity
 @Data
@@ -21,27 +23,20 @@ import java.time.LocalDate;
 @Where(clause = "is_delete = false")
 public class EmployeeEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @NonNull
-    private String fulltName;
+  @NonNull private String fulltName;
 
-    @NonNull
-    private LocalDate employmentDate;
+  @NonNull private LocalDate employmentDate;
 
-    private LocalDate dismissDate;
+  private LocalDate dismissDate;
 
-    @NonNull
-    private Long organizationId;
+  @NonNull private Long organizationId;
 
-    @NonNull
-    private Long personId;
+  @NonNull private Long personId;
 
-    @Column(nullable = false)
-    private boolean isDelete = false;
-
-
-
+  @Column(nullable = false)
+  private boolean isDelete = false;
 }
