@@ -6,20 +6,19 @@ import com.payroll.payslip.person.model.dto.CreatePersonResponse;
 import com.payroll.payslip.person.model.dto.PersonResponse;
 import com.payroll.payslip.person.model.dto.UpdatePersonRequest;
 import com.payroll.payslip.person.model.dto.UpdatePersonResponse;
+import com.payroll.payslip.person.model.entity.PersonEntity;
 import com.payroll.payslip.person.persistence.repository.PersonPostgresRepository;
 import com.payroll.payslip.person.service.mapper.PersonEntity2Dto;
 import com.payroll.payslip.person.service.mapper.PersonEntityToCreateDtoMapper;
 import com.payroll.payslip.person.service.mapper.PersonEntityToUpdateDtoMapper;
-import com.payroll.payslip.person.model.entity.PersonEntity;
-import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
 @Service
 public class PersonServiceImpl implements PersonService {
   private final PersonPostgresRepository repository;
-  private final PersonEntityToCreateDtoMapper createMapper =PersonEntityToCreateDtoMapper.INSTANCE;
+  private final PersonEntityToCreateDtoMapper createMapper = PersonEntityToCreateDtoMapper.INSTANCE;
   private final PersonEntityToUpdateDtoMapper updateMapper = PersonEntityToUpdateDtoMapper.INSTANCE;
   private final PersonEntity2Dto mapper = PersonEntity2Dto.INSTANCE;
 
