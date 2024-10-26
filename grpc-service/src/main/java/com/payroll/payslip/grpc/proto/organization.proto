@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package com.payroll.payslip.proto;
+
+option java_multiple_files = true;
+option java_package = "com.payroll.payslip.proto";
+
+message Organization {
+  int32 id = 1;
+  string first_name = 2;
+  string sure_name = 3;
+  string email = 4;
+}
+
+message GetOrganizationRequest {
+  int32 person_id = 1;
+}
+
+message GetOrganizationResponse {
+  Organization organization = 1;
+}
+
+service OrganizationDataService {
+  rpc GetDataOrganizationById(GetOrganizationRequest) returns GetOrganizationResponse;
+}

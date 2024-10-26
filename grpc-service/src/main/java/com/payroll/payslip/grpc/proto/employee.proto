@@ -1,6 +1,9 @@
 syntax = "proto3";
 
-package employee;
+package com.payroll.payslip.proto;
+
+option java_multiple_files = true;
+
 
 message Employee {
   int32 id = 1;
@@ -12,13 +15,13 @@ message Employee {
 }
 
 message GetEmployeeRequest {
-  string employee_id = 1;
+  int32 employee_id = 1;
 }
 
 message GetEmployeeResponse {
   Employee employee = 1;
 }
 
-service EmployeeService {
+service EmployeeDataService {
   rpc GetEmployeeById(GetEmployeeRequest) returns (GetEmployeeResponse);
 }
