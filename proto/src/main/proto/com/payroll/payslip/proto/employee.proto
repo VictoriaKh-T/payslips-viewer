@@ -2,14 +2,13 @@ syntax = "proto3";
 
 package employee;
 
-// Визначення структури Employee
 message Employee {
-  string id = 1;
+  int32 id = 1;
   string full_name = 2;
   string empl_date = 3;
   string dis_date = 4;
-  string person_id = 5;
-  string organization_id = 6;
+  int32 person_id = 5;
+  int32 organization_id = 6;
 }
 
 message GetEmployeeRequest {
@@ -20,7 +19,6 @@ message GetEmployeeResponse {
   Employee employee = 1;
 }
 
-// gRPC Employee
 service EmployeeService {
   rpc GetEmployeeById(GetEmployeeRequest) returns (GetEmployeeResponse);
 }
