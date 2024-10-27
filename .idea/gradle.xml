@@ -10,11 +10,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/employee" />
-            <option value="$PROJECT_DIR$/grpc-server" />
             <option value="$PROJECT_DIR$/grpc-service" />
             <option value="$PROJECT_DIR$/organization" />
             <option value="$PROJECT_DIR$/person" />
-            <option value="$PROJECT_DIR$/proto" />
           </set>
         </option>
       </GradleProjectSettings>

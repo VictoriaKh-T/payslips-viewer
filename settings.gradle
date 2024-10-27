@@ -2,7 +2,5 @@ rootProject.name = "payslip"
 include("person")
 include("organization")
 include("employee")
-include("proto")
-include("grpc-server")
 include 'grpc-service'
 

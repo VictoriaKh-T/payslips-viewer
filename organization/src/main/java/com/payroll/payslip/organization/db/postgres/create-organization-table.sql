@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS public.organizations
 (
-    id SERIAL PRIMARY KEY,
+    id BIGINT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     address VARCHAR(255) NOT NULL,
     kod_organization VARCHAR(255) NOT NULL,

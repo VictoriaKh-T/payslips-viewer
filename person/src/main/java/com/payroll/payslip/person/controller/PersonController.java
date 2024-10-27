@@ -20,7 +20,7 @@ import com.payroll.payslip.person.model.dto.UpdatePersonRequest;
 import com.payroll.payslip.person.model.dto.UpdatePersonResponse;
 import com.payroll.payslip.person.service.PersonService;
 
-@Tag(name = "User management", description = "Endpoints for managing organization")
+@Tag(name = "User management", description = "Endpoints for managing persons")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/persons")
