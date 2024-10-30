@@ -1,9 +1,9 @@
-name: Spotless Check
+name: Test Check
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
-  spotless:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -23,5 +23,5 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle
 
-      - name: Run Spotless check
-        run: ./gradlew spotlessCheck
+      - name: Run Checkstyle
+        run: ./gradlew checkstyleMain checkstyleTest
