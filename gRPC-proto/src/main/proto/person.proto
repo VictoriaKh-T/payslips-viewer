@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package com.payroll.payslip.proto;
+
+option java_multiple_files = true;
+option java_package = "com.payroll.payslip.proto";
+
+    message Person {
+       int32 id = 1;
+       string first_name = 2;
+       string sure_name = 3;
+       string email = 4;
+    }
+
+    message GetPersonRequest {
+        int32 person_id = 1;
+    }
+
+    message GetPersonResponse {
+        Person person = 1;
+    }
+
+    message GetFullNameRequest {
+      int32  person_id = 1;
+    }
+
+    message  GetFullNameResponse {
+      string first_name = 1;
+      string sure_name = 2;
+    }
+
+    service PersonDataService {
+      rpc GetPersonById(GetPersonRequest) returns (GetPersonResponse);
+      rpc CetFullNameByPersonId(GetFullNameRequest) returns (GetFullNameResponse);
+    }

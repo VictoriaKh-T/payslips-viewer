@@ -4,7 +4,6 @@ plugins {
     id 'org.springframework.boot' version '3.2.4'
     id 'io.spring.dependency-management' version '1.1.4'
     id 'checkstyle'
-    id 'com.diffplug.spotless' version '6.11.0'
 }
 
 repositories {
@@ -13,17 +12,44 @@ repositories {
     gradlePluginPortal()
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+checkstyle {
+
+    project.ext.checkstyleVersion = '10.17.0'
+    project.ext.sevntuChecksVersion = '1.44.1'
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        // we keep artifacts in maven central too,
+        // but this is just example of usage from our old maven repo on github
+        maven {
+            url "https://sevntu-checkstyle.github.com/sevntu.checkstyle/maven2"
+        }
+    }
+
+    ignoreFailures = true
+    configFile = file("${project.rootDir}/checkstyle.xml")
+
+    checkstyleMain {
+        source = sourceSets.main.allSource
+    }
+
+    configurations {
+        checkstyle
+    }
+
+    dependencies{
+        assert project.hasProperty("checkstyleVersion")
+
+        checkstyle "com.puppycrawl.tools:checkstyle:${checkstyleVersion}"
+        checkstyle "com.github.sevntu-checkstyle:sevntu-checks:${sevntuChecksVersion}"
+    }
 }
 
-checkstyle {
-    toolVersion = '10.12.1'
-    configFile = file("${project.rootDir}/config/checkstyle/checkstyle.xml")
-}
 
 dependencies {
+    assert project.hasProperty("checkstyleVersion")
+
     // Spring Boot dependencies
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -51,48 +77,13 @@ dependencies {
     // JUnit for testing
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
-
-    checkstyle "com.puppycrawl.tools:checkstyle:${checkstyle.toolVersion}"
+    testImplementation 'org.mockito:mockito-core:5.0.0'
 }
 
 tasks.test {
     useJUnitPlatform()
 }
 
-tasks.withType(Checkstyle) {
-    reports {
-        xml.required = false
-        html.required = true
-    }
-}
 
-tasks.register('checkCodeCleanliness') {
-    dependsOn 'spotlessCheck'
-    doLast {
-        println 'Code Cleanliness Check Complete'
-    }
-}
-
-tasks.named('spotlessApply') {
-    doLast {
-        println 'Code Cleanliness Applied'
-    }
-}
-
-spotless {
-    java {
-        googleJavaFormat()
-        removeUnusedImports()
-        trimTrailingWhitespace()
-        indentWithSpaces(4)
-        endWithNewline()
-        // Checkstyle
-        checkstyle {
-            configFile = file("${project.rootDir}/config/checkstyle/checkstyle.xml")
-        }
-
-        target 'src/main/java/**/*.java', 'src/test/java/**/*.java'
-    }
-}
 
 

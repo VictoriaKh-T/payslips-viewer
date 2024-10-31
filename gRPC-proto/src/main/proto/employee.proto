@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package com.payroll.payslip.proto;
+
+option java_multiple_files = true;
+
+
+message Employee {
+  int32 id = 1;
+  string full_name = 2;
+  string empl_date = 3;
+  string dis_date = 4;
+  int32 person_id = 5;
+  int32 organization_id = 6;
+}
+
+message GetEmployeeRequest {
+  int32 employee_id = 1;
+}
+
+message GetEmployeeResponse {
+  Employee employee = 1;
+}
+
+service EmployeeDataService {
+  rpc GetEmployeeById(GetEmployeeRequest) returns (GetEmployeeResponse);
+}
