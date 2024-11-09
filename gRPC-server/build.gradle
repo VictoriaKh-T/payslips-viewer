@@ -1,6 +1,8 @@
 plugins {
     id 'java'
+    id 'application'
     id 'com.google.protobuf' version '0.9.4'
+    id 'com.diffplug.spotless' version '6.11.0'
 }
 
 java {
@@ -27,4 +29,35 @@ dependencies {
     implementation 'net.devh:grpc-server-spring-boot-starter:3.1.0.RELEASE'
 
     implementation project(':gRPC-proto')
+
+    // https://mvnrepository.com/artifact/com.google.googlejavaformat/google-java-format
+    implementation("com.google.googlejavaformat:google-java-format:1.24.0")
+}
+
+
+tasks.register('checkCodeCleanliness') {
+    dependsOn 'spotlessCheck'
+    doLast {
+        println 'Code Cleanliness Check Complete'
+    }
+}
+
+tasks.named('spotlessApply') {
+    doLast {
+        println 'Code Cleanliness Applied'
+    }
+}
+
+spotless {
+    java {
+        googleJavaFormat('1.24.0')
+
+        importOrder('java', 'javax', '', 'org', 'com')
+        removeUnusedImports()
+        trimTrailingWhitespace()
+        indentWithSpaces(4)
+        endWithNewline()
+
+        target 'src/main/java/**/*.java', 'src/test/java/**/*.java'
+    }
 }
