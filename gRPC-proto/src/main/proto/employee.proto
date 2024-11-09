@@ -1,15 +1,17 @@
 syntax = "proto3";
 
 package com.payroll.payslip.proto;
-
 option java_multiple_files = true;
+import "person.proto";
+import "organization.proto";
+import "google/protobuf/timestamp.proto";
 
 
 message Employee {
   int32 id = 1;
   string full_name = 2;
-  string empl_date = 3;
-  string dis_date = 4;
+  google.protobuf.Timestamp empl_date = 3;
+  google.protobuf.Timestamp dis_date = 4;
   int32 person_id = 5;
   int32 organization_id = 6;
 }
@@ -22,6 +24,12 @@ message GetEmployeeResponse {
   Employee employee = 1;
 }
 
+message CreateEmployeeResponse {
+  Employee employee = 1;
+}
+
 service EmployeeDataService {
   rpc GetEmployeeById(GetEmployeeRequest) returns (GetEmployeeResponse);
+  rpc CreateEmployeeViaPerson(GetPersonRequest) returns (CreateEmployeeResponse);
+  rpc AddEmployeeOrganizationData(GetOrganizationRequest) returns (CreateEmployeeResponse);
 }
