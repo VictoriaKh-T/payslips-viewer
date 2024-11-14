@@ -10,10 +10,8 @@ import "google/protobuf/timestamp.proto";
 message Employee {
   int32 id = 1;
   string full_name = 2;
-  google.protobuf.Timestamp empl_date = 3;
-  google.protobuf.Timestamp dis_date = 4;
-  int32 person_id = 5;
-  int32 organization_id = 6;
+  int32 person_id = 3;
+  int32 organization_id = 4;
 }
 
 message GetEmployeeRequest {
@@ -24,12 +22,21 @@ message GetEmployeeResponse {
   Employee employee = 1;
 }
 
+message CreateEmployeeRequest {
+  int32 id = 1;
+  string full_name = 2;
+  int32 person_id = 3;
+  int32 organization_id = 4;
+}
+
 message CreateEmployeeResponse {
-  Employee employee = 1;
+  int32 id = 1;
+  string full_name = 2;
+  int32 person_id = 3;
+  int32 organization_id = 4;
 }
 
 service EmployeeDataService {
   rpc GetEmployeeById(GetEmployeeRequest) returns (GetEmployeeResponse);
-  rpc CreateEmployeeViaPerson(GetPersonRequest) returns (CreateEmployeeResponse);
-  rpc AddEmployeeOrganizationData(GetOrganizationRequest) returns (CreateEmployeeResponse);
+  rpc CreateEmployeeViaPerson(CreateEmployeeRequest) returns (CreateEmployeeResponse);
 }

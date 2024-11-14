@@ -1,0 +1,17 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: person-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/person/**
+          filters:
+            - RewritePath=/person/(?<segment>.*), /${segment}
+
+        - id: employee-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/employee/**
+          filters:
+            - RewritePath=/employee/(?<segment>.*), /${segment}

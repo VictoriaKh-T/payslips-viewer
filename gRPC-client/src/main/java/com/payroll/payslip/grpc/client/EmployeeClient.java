@@ -12,7 +12,7 @@ import com.payroll.payslip.proto.PersonDataServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
-public class GrpcClient {
+public class EmployeeClient {
 
     private final ManagedChannel employeeChannel;
     private final ManagedChannel organizationChannel;
@@ -21,7 +21,7 @@ public class GrpcClient {
     private final OrganizationDataServiceGrpc.OrganizationDataServiceBlockingStub organizationStub;
     private final PersonDataServiceGrpc.PersonDataServiceBlockingStub personStub;
 
-    public GrpcClient(String host, int port, int employeePort, int organizationPort, int personPort) {
+    public EmployeeClient(String host, int port, int employeePort, int organizationPort, int personPort) {
         employeeChannel = ManagedChannelBuilder.forAddress(host, employeePort)
                 .usePlaintext()
                 .build();
