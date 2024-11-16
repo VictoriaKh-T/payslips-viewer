@@ -2,6 +2,9 @@ package com.payroll.payslip.employee.service;
 
 import java.util.List;
 
+import com.payroll.payslip.employee.persistence.repository.EmployeePostgresRepository;
+import com.payroll.payslip.employee.service.mapper.EmployeeDtoToEntityMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import com.payroll.payslip.employee.model.dto.CreateEmployeeRequest;
@@ -13,10 +16,14 @@ import com.payroll.payslip.employee.model.dto.UpdateEmployeeRequest;
 import com.payroll.payslip.employee.model.dto.UpdateEmployeeResponse;
 
 @Service
+@RequiredArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
+  private final EmployeeDtoToEntityMapper mapper =
+          EmployeeDtoToEntityMapper.INSTANCE;
+  private final EmployeePostgresRepository repository;
   @Override
   public CreateEmployeeResponse createEmployee(CreateEmployeeRequest request) {
-    return null;
+      return mapper.mapToCreateResponse(repository.save(mapper.createEmplMapToEntity(request)));
   }
 
   @Override
