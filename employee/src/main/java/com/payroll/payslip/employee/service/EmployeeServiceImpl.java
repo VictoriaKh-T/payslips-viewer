@@ -2,7 +2,6 @@ package com.payroll.payslip.employee.service;
 
 import java.util.List;
 
-import com.payroll.payslip.grpc.client.PersonGrpcClient;
 import lombok.AllArgsConstructor;
 
 import org.springframework.stereotype.Service;
@@ -18,6 +17,7 @@ import com.payroll.payslip.employee.model.dto.UpdateEmployeeResponse;
 import com.payroll.payslip.employee.model.entity.EmployeeEntity;
 import com.payroll.payslip.employee.persistence.repository.EmployeePostgresRepository;
 import com.payroll.payslip.employee.service.mapper.EmployeeDtoToEntityMapper;
+import com.payroll.payslip.grpc.client.PersonGrpcClient;
 
 @Service
 @AllArgsConstructor
