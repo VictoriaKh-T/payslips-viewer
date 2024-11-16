@@ -1,18 +1,10 @@
 package com.payroll.payslip.grpc.server;
 
-import com.payroll.payslip.proto.CreateEmployeeRequest;
-import com.payroll.payslip.proto.GetPersonRequest;
+import com.payroll.payslip.proto.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
-
-import com.payroll.payslip.proto.CreateEmployeeResponse;
-import com.payroll.payslip.proto.EmployeeDataServiceGrpc;
-import com.payroll.payslip.proto.GetEmployeeRequest;
-import com.payroll.payslip.proto.GetEmployeeResponse;
-import com.payroll.payslip.proto.GetPersonResponse;
-import com.payroll.payslip.proto.PersonDataServiceGrpc;
 
 @GrpcService
 public class EmployeeDataServiceImpl extends EmployeeDataServiceGrpc.EmployeeDataServiceImplBase {
@@ -48,6 +40,13 @@ public class EmployeeDataServiceImpl extends EmployeeDataServiceGrpc.EmployeeDat
   @Override
   public void getEmployeeById(
       GetEmployeeRequest request, StreamObserver<GetEmployeeResponse> responseObserver) {
+
+    Employee employee = Employee.newBuilder()
+            .setId(request.getEmployeeId())
+            .build();
+    GetEmployeeResponse response = GetEmployeeResponse.newBuilder().setEmployee(employee).build();
+    responseObserver.onNext(response);
+    responseObserver.onCompleted();
 
   }
 
