@@ -1,5 +1,5 @@
 package com.payroll.payslip.grpc.server;
-
+import com.payroll.payslip.proto.Person;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
 
@@ -12,7 +12,12 @@ public class PersonDataServiceImpl extends PersonDataServiceGrpc.PersonDataServi
 
   @Override
   public void getPersonById(
-      GetPersonRequest request, StreamObserver<GetPersonResponse> responseObserver) {
-    super.getPersonById(request, responseObserver);
+          GetPersonRequest request, StreamObserver<GetPersonResponse> responseObserver) {
+    Person person = Person.newBuilder()
+            .setId(request.getPersonId())
+            .build();
+    GetPersonResponse response = GetPersonResponse.newBuilder().setPerson(person).build();
+    responseObserver.onNext(response);
+    responseObserver.onCompleted();
   }
 }
