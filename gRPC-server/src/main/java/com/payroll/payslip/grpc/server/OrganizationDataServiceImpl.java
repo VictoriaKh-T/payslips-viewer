@@ -1,5 +1,6 @@
 package com.payroll.payslip.grpc.server;
 
+import com.payroll.payslip.proto.Organization;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
 
@@ -12,8 +13,10 @@ public class OrganizationDataServiceImpl
     extends OrganizationDataServiceGrpc.OrganizationDataServiceImplBase {
 
   @Override
-  public void getDataOrganizationById(
-      GetOrganizationRequest request, StreamObserver<GetOrganizationResponse> responseObserver) {
-    super.getDataOrganizationById(request, responseObserver);
+  public void getOrganizationById(GetOrganizationRequest request, StreamObserver<GetOrganizationResponse> responseObserver) {
+    GetOrganizationResponse response = GetOrganizationResponse.newBuilder().setOrganization(
+            Organization.newBuilder().setOrganizationId(request.getOrganizationId()).build()).build();
+    responseObserver.onNext(response);
+    responseObserver.onCompleted();
   }
 }
