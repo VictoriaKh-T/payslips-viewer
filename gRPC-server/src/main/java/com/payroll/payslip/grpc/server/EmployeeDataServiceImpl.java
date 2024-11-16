@@ -1,10 +1,11 @@
 package com.payroll.payslip.grpc.server;
 
-import com.payroll.payslip.proto.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
+
+import com.payroll.payslip.proto.*;
 
 @GrpcService
 public class EmployeeDataServiceImpl extends EmployeeDataServiceGrpc.EmployeeDataServiceImplBase {
@@ -15,7 +16,8 @@ public class EmployeeDataServiceImpl extends EmployeeDataServiceGrpc.EmployeeDat
       PersonDataServiceGrpc.newBlockingStub(personChannel);
 
   @Override
-  public void createEmployeeViaPerson(CreateEmployeeRequest request, StreamObserver<CreateEmployeeResponse> responseObserver) {
+  public void createEmployeeViaPerson(
+      CreateEmployeeRequest request, StreamObserver<CreateEmployeeResponse> responseObserver) {
     int personId = request.getPersonId();
     GetPersonRequest getPersonRequest = GetPersonRequest.newBuilder().setPersonId(personId).build();
     System.out.println("Received request for person " + personId);
@@ -27,11 +29,11 @@ public class EmployeeDataServiceImpl extends EmployeeDataServiceGrpc.EmployeeDat
     String fullName = sureName + " " + firstName;
 
     CreateEmployeeResponse response =
-            CreateEmployeeResponse.newBuilder()
-                    .setId(generateEmployeeId())
-                    .setFullName(fullName)
-                    .setPersonId(personId)
-                    .build();
+        CreateEmployeeResponse.newBuilder()
+            .setId(generateEmployeeId())
+            .setFullName(fullName)
+            .setPersonId(personId)
+            .build();
 
     responseObserver.onNext(response);
     responseObserver.onCompleted();
@@ -41,13 +43,10 @@ public class EmployeeDataServiceImpl extends EmployeeDataServiceGrpc.EmployeeDat
   public void getEmployeeById(
       GetEmployeeRequest request, StreamObserver<GetEmployeeResponse> responseObserver) {
 
-    Employee employee = Employee.newBuilder()
-            .setId(request.getEmployeeId())
-            .build();
+    Employee employee = Employee.newBuilder().setId(request.getEmployeeId()).build();
     GetEmployeeResponse response = GetEmployeeResponse.newBuilder().setEmployee(employee).build();
     responseObserver.onNext(response);
     responseObserver.onCompleted();
-
   }
 
   private int generateEmployeeId() {
