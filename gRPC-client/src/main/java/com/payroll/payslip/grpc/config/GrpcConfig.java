@@ -1,9 +1,10 @@
 package com.payroll.payslip.grpc.config;
 
-import com.payroll.payslip.proto.PersonDataServiceGrpc;
+import com.payroll.payslip.grpc.client.PersonGrpcClient;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import jakarta.annotation.PreDestroy;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,11 +16,6 @@ public class GrpcConfig {
         return ManagedChannelBuilder.forAddress("localhost", 50053)
                 .usePlaintext()
                 .build();
-    }
-
-    @Bean
-    public PersonDataServiceGrpc.PersonDataServiceBlockingStub personGrpcClient(ManagedChannel personChannel) {
-        return PersonDataServiceGrpc.newBlockingStub(personChannel);
     }
 
     @Bean

@@ -4,9 +4,9 @@ import com.payroll.payslip.proto.GetOrganizationRequest;
 import com.payroll.payslip.proto.GetOrganizationResponse;
 import com.payroll.payslip.proto.OrganizationDataServiceGrpc;
 import io.grpc.ManagedChannel;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class OrganizationGrpcClient {
     private final OrganizationDataServiceGrpc.OrganizationDataServiceBlockingStub organizationStub;
 

@@ -4,9 +4,9 @@ import com.payroll.payslip.proto.EmployeeDataServiceGrpc;
 import com.payroll.payslip.proto.GetEmployeeRequest;
 import com.payroll.payslip.proto.GetEmployeeResponse;
 import io.grpc.ManagedChannel;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class EmployeeGrpcClient {
 
     private final EmployeeDataServiceGrpc.EmployeeDataServiceBlockingStub employeeStub;

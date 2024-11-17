@@ -4,6 +4,7 @@ import com.payroll.payslip.proto.GetPersonRequest;
 import com.payroll.payslip.proto.GetPersonResponse;
 import com.payroll.payslip.proto.PersonDataServiceGrpc;
 import io.grpc.ManagedChannel;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class PersonGrpcClient {
     private final PersonDataServiceGrpc.PersonDataServiceBlockingStub personStub;
 
-    public PersonGrpcClient(ManagedChannel personChannel) {
+    public PersonGrpcClient(@Qualifier("personChannel")ManagedChannel personChannel) {
         this.personStub = PersonDataServiceGrpc.newBlockingStub(personChannel);
     }
 
