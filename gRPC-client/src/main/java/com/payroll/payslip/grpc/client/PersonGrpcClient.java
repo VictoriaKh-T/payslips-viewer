@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class PersonGrpcClient {
     private final PersonDataServiceGrpc.PersonDataServiceBlockingStub personStub;
 
-    public PersonGrpcClient(@Qualifier("personChannel")ManagedChannel personChannel) {
+    public PersonGrpcClient(@Qualifier("personChannel") ManagedChannel personChannel) {
         this.personStub = PersonDataServiceGrpc.newBlockingStub(personChannel);
     }
 

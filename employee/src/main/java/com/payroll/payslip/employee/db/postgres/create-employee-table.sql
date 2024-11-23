@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS public.employee
+CREATE TABLE IF NOT EXISTS public.employees
     (
         id BIGINT PRIMARY KEY,
         full_name VARCHAR(255) NOT NULL,
