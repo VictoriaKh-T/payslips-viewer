@@ -1,17 +1,17 @@
 package com.payroll.payslip.person.persistence.repository;
 
+import java.time.LocalDate;
+import java.util.Optional;
 
-import com.payroll.payslip.person.model.entity.PersonEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
-import java.util.Optional;
+import com.payroll.payslip.person.model.entity.PersonEntity;
 
 @Repository
 public interface PersonPostgresRepository extends JpaRepository<PersonEntity, Long> {
 
-  Optional<PersonEntity> findPersonEntityByBirthDate(LocalDate bitrhDate);
+    Optional<PersonEntity> findPersonEntityByBirthDate(LocalDate bitrhDate);
 
-  Optional<PersonEntity> findPersonEntityByEmail(String email);
+    Optional<PersonEntity> findPersonEntityByEmail(String email);
 }

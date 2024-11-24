@@ -1,0 +1,63 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.google.protobuf' version '0.9.4'
+    id 'com.diffplug.spotless' version '6.11.0'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+def protobufJavaVersion = "3.22.2"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    def grpcVersion = '1.53.0'
+
+    implementation 'com.google.protobuf:protobuf-java:3.19.1'
+
+    implementation "io.grpc:grpc-netty:${grpcVersion}"
+    implementation "io.grpc:grpc-protobuf:${grpcVersion}"
+    implementation "io.grpc:grpc-stub:${grpcVersion}"
+    implementation 'com.google.api.grpc:proto-google-common-protos:1.17.0'
+    implementation 'javax.annotation:javax.annotation-api:1.3.2'
+    implementation 'net.devh:grpc-server-spring-boot-starter:3.1.0.RELEASE'
+
+    implementation project(':gRPC-proto')
+
+    // https://mvnrepository.com/artifact/com.google.googlejavaformat/google-java-format
+    implementation("com.google.googlejavaformat:google-java-format:1.24.0")
+}
+
+
+tasks.register('checkCodeCleanliness') {
+    dependsOn 'spotlessCheck'
+    doLast {
+        println 'Code Cleanliness Check Complete'
+    }
+}
+
+tasks.named('spotlessApply') {
+    doLast {
+        println 'Code Cleanliness Applied'
+    }
+}
+
+spotless {
+    java {
+        googleJavaFormat('1.24.0')
+
+        importOrder('java', 'javax', '', 'org', 'com')
+        removeUnusedImports()
+        trimTrailingWhitespace()
+        indentWithSpaces(4)
+        endWithNewline()
+
+        target 'src/main/java/**/*.java', 'src/test/java/**/*.java'
+    }
+}

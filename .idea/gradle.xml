@@ -5,17 +5,44 @@
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="" />
+        <option name="gradleHome" value="C:/Gradle/gradle-8.11" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/2-lib" />
-            <option value="$PROJECT_DIR$/2-lib/addition-annotation" />
+            <option value="$PROJECT_DIR$/api-gateway" />
             <option value="$PROJECT_DIR$/employee" />
+            <option value="$PROJECT_DIR$/gRPC-client" />
+            <option value="$PROJECT_DIR$/gRPC-proto" />
+            <option value="$PROJECT_DIR$/gRPC-server" />
             <option value="$PROJECT_DIR$/organization" />
             <option value="$PROJECT_DIR$/person" />
           </set>
         </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="LOCAL" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/api-gateway" />
+        <option name="gradleHome" value="C:/Gradle/gradle-8.11" />
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/gRPC-client" />
+        <option name="gradleHome" value="C:/Gradle/gradle-8.11" />
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/gRPC-proto" />
+        <option name="gradleHome" value="C:/Gradle/gradle-8.11" />
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/gRPC-server" />
+        <option name="gradleHome" value="C:/Gradle/gradle-8.11" />
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/grpc-server" />
+        <option name="gradleHome" value="C:/Gradle/gradle-8.11" />
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/proto" />
+        <option name="gradleHome" value="C:/Gradle/gradle-8.11" />
       </GradleProjectSettings>
     </option>
   </component>
