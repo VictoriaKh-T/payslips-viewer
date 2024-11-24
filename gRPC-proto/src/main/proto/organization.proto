@@ -6,14 +6,14 @@ option java_multiple_files = true;
 option java_package = "com.payroll.payslip.proto";
 
 message Organization {
-  int32 id = 1;
-  string first_name = 2;
-  string sure_name = 3;
-  string email = 4;
+  int32 organization_id = 1;
+  string organizationKod = 2;
+  string organizationName = 3;
+  string adress = 4;
 }
 
 message GetOrganizationRequest {
-  int32 person_id = 1;
+  int32 organization_id = 1;
 }
 
 message GetOrganizationResponse {
@@ -21,5 +21,5 @@ message GetOrganizationResponse {
 }
 
 service OrganizationDataService {
-  rpc GetDataOrganizationById(GetOrganizationRequest) returns (GetOrganizationResponse);
+  rpc GetOrganizationById(GetOrganizationRequest) returns (GetOrganizationResponse);
 }
