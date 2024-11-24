@@ -18,6 +18,7 @@ import com.payroll.payslip.employee.model.entity.EmployeeEntity;
 import com.payroll.payslip.employee.persistence.repository.EmployeePostgresRepository;
 import com.payroll.payslip.employee.service.mapper.EmployeeDtoToEntityMapper;
 import com.payroll.payslip.grpc.client.PersonGrpcClient;
+import com.payroll.payslip.proto.GetPersonResponse;
 
 @Service
 @AllArgsConstructor
@@ -28,7 +29,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
   @Override
   public CreateEmployeeResponse createEmployee(CreateEmployeeRequest request) {
-    return mapper.mapToCreateResponse(repository.save(mapper.createEmplMapToEntity(request)));
+    GetPersonResponse personResponse =
+        personGrpcClient.getPersonById(Math.toIntExact(request.personId()));
+    EmployeeEntity employeeEntity = mapper.createEmplMapToEntity(request);
+    employeeEntity.setFulltName(
+        personResponse.getPerson().getFirstName() + " " + personResponse.getPerson().getSureName());
+    employeeEntity.setPersonId(Long.valueOf(personResponse.getPerson().getId()));
+    return mapper.mapToCreateResponse(repository.save(employeeEntity));
   }
 
   @Override

@@ -51,6 +51,7 @@ dependencies {
 
     //grpc
     implementation project(':gRPC-client')
+    implementation project(':gRPC-server')
     implementation project(':gRPC-proto')
 
     implementation 'io.grpc:grpc-netty:1.56.0'
