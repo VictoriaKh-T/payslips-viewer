@@ -9,7 +9,7 @@ public class EmployeeDataServer {
 
   public static void main(String[] args) throws InterruptedException, IOException {
     Server server = ServerBuilder.forPort(50051).addService(new EmployeeDataServiceImpl()).build();
-    System.out.println("Server started...");
+    System.out.println("Server 50051 started...");
     server.start();
     server.awaitTermination();
   }

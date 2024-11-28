@@ -1,11 +1,8 @@
 package com.payroll.payslip.grpc.config;
 
-import com.payroll.payslip.grpc.client.PersonGrpcClient;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import jakarta.annotation.PreDestroy;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -33,22 +30,11 @@ public class GrpcConfig {
                 .build();
     }
 
-    @Autowired
-    @Qualifier("personChannel")
-    private ManagedChannel personChannel;
-
-    @Autowired
-    @Qualifier("organizationChannel")
-    private ManagedChannel organizationChannel;
-
-    @Autowired
-    @Qualifier("employeeChannel")
-    private ManagedChannel employeeChannel;
 
     @PreDestroy
     public void shutdownChannels() {
-        personChannel.shutdown();
-        organizationChannel.shutdown();
-        employeeChannel.shutdown();
+        personChannel().shutdown();
+        organizationChannel().shutdown();
+        employeeChannel().shutdown();
     }
 }

@@ -1,4 +1,12 @@
+pluginManagement {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
 rootProject.name = "payslip"
+
 include("person")
 include("organization")
 include("employee")
@@ -6,3 +14,23 @@ include("gRPC-proto")
 include("gRPC-client")
 include("gRPC-server")
 include ("api-gateway")
+
+
+
+dependencyResolutionManagement {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    versionCatalogs {
+        create("libs") {
+            def  grpcVersion = "1.68.1"
+
+            library("grpcApi", "io.grpc:grpc-api:${grpcVersion}")
+            library("grpcStub", "io.grpc:grpc-stub:${grpcVersion}")
+            library("grpcProtobuf", "io.grpc:grpc-protobuf:${grpcVersion}")
+            library("grpcNetty", "io.grpc:grpc-netty:${grpcVersion}")
+
+        }
+    }
+}

@@ -15,22 +15,20 @@ repositories {
 }
 
 dependencies {
-    def grpcVersion = '1.53.0'
+    implementation project(':gRPC-proto')
 
-    /**
-     * Network dependencies
-     */
+    implementation(libs.grpcApi)
+    implementation(libs.grpcStub)
+    implementation(libs.grpcProtobuf)
+    implementation(libs.grpcNetty)
     implementation 'com.google.protobuf:protobuf-java:3.19.1'
-
-    implementation "io.grpc:grpc-netty:${grpcVersion}"
-    implementation "io.grpc:grpc-protobuf:${grpcVersion}"
-    implementation "io.grpc:grpc-stub:${grpcVersion}"
     implementation 'com.google.api.grpc:proto-google-common-protos:1.17.0'
     implementation 'javax.annotation:javax.annotation-api:1.3.2'
+
     implementation 'net.devh:grpc-client-spring-boot-starter:3.1.0.RELEASE'
 
 
-    implementation project(':gRPC-proto')
+
 }
 
 sourceSets {
