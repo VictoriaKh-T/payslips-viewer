@@ -5,7 +5,7 @@ import java.util.List;
 import com.payroll.payslip.employee.model.dto.*;
 
 public interface EmployeeService {
-  CreateEmployeeResponse createEmployee(CreateEmployeeRequest request);
+  CreateEmployeeResponseDto createEmployee(CreateEmployeeRequestDto request);
 
   UpdateEmployeeResponse updateEmployee(Long id, UpdateEmployeeRequest request);
 

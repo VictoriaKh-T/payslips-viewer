@@ -8,12 +8,12 @@ import "google/protobuf/timestamp.proto";
 message Employee {
   int64 id = 1;
   string full_name = 2;
-  int32 person_id = 3;
-  int32 organization_id = 4;
+  int64 person_id = 3;
+  int64 organization_id = 4;
 }
 
 message GetEmployeeRequest {
-  int32 employee_id = 1;
+  int64 employee_id = 1;
 }
 
 message GetEmployeeResponse {
@@ -23,15 +23,15 @@ message GetEmployeeResponse {
 message CreateEmployeeRequest {
   int64 id = 1;
   string full_name = 2;
-  int32 person_id = 3;
-  int32 organization_id = 4;
+  int64 person_id = 3;
+  int64 organization_id = 4;
 }
 
 message CreateEmployeeResponse {
   int64 id = 1;
   string full_name = 2;
-  int32 person_id = 3;
-  int32 organization_id = 4;
+  int64 person_id = 3;
+  int64 organization_id = 4;
 }
 
 service EmployeeDataService {

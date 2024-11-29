@@ -1,11 +1,18 @@
 package com.payroll.payslip.grpc.server;
 
+import com.payroll.payslip.proto.CreateEmployeeRequest;
+import com.payroll.payslip.proto.CreateEmployeeResponse;
+import com.payroll.payslip.proto.Employee;
+import com.payroll.payslip.proto.EmployeeDataServiceGrpc;
+import com.payroll.payslip.proto.GetEmployeeRequest;
+import com.payroll.payslip.proto.GetEmployeeResponse;
+import com.payroll.payslip.proto.GetPersonRequest;
+import com.payroll.payslip.proto.GetPersonResponse;
+import com.payroll.payslip.proto.PersonDataServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
-
-import com.payroll.payslip.proto.*;
 
 @GrpcService
 public class EmployeeDataServiceImpl extends EmployeeDataServiceGrpc.EmployeeDataServiceImplBase {
@@ -18,7 +25,8 @@ public class EmployeeDataServiceImpl extends EmployeeDataServiceGrpc.EmployeeDat
   @Override
   public void createEmployeeViaPerson(
       CreateEmployeeRequest request, StreamObserver<CreateEmployeeResponse> responseObserver) {
-    int personId = request.getPersonId();
+    long personId = request.getPersonId();
+
     GetPersonRequest getPersonRequest = GetPersonRequest.newBuilder().setPersonId(personId).build();
     System.out.println("Received request for person " + personId);
 
