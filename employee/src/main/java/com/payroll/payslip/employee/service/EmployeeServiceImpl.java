@@ -30,7 +30,7 @@ public class EmployeeServiceImpl implements EmployeeService {
   @Override
   public CreateEmployeeResponse createEmployee(CreateEmployeeRequest request) {
     GetPersonResponse personResponse =
-        personGrpcClient.getPersonById(Math.toIntExact(request.personId()));
+        personGrpcClient.getPersonById(request.personId());
     EmployeeEntity employeeEntity = mapper.createEmplMapToEntity(request);
     employeeEntity.setFulltName(
         personResponse.getPerson().getFirstName() + " " + personResponse.getPerson().getSureName());

@@ -16,7 +16,7 @@ public class PersonGrpcClient {
         this.personStub = PersonDataServiceGrpc.newBlockingStub(personChannel);
     }
 
-    public GetPersonResponse getPersonById(int personId) {
+    public GetPersonResponse getPersonById(long personId) {
         GetPersonRequest request = GetPersonRequest.newBuilder()
                 .setPersonId(personId)
                 .build();

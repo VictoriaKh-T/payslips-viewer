@@ -6,7 +6,7 @@ option java_multiple_files = true;
 option java_package = "com.payroll.payslip.proto";
 
 message Organization {
-  int32 organization_id = 1;
+  int64 organization_id = 1;
   string organizationKod = 2;
   string organizationName = 3;
   string adress = 4;
