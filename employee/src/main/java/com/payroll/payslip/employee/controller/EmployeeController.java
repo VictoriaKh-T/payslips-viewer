@@ -53,7 +53,7 @@ public class EmployeeController {
 
   @PostMapping
   @Tag(name = "create new employee data", description = "This point create new employee")
-  public CreateEmployeeResponse createEmployee(@RequestBody CreateEmployeeRequest request) {
+  public CreateEmployeeResponseDto createEmployee(@RequestBody CreateEmployeeRequestDto request) {
     return employeeService.createEmployee(request);
   }
 

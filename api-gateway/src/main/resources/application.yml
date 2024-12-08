@@ -2,23 +2,38 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: person-service
+        - id: person
           uri: http://localhost:8081
           predicates:
             - Path=/persons/**
           filters:
             - RewritePath=/persons/(?<segment>.*), /${segment}
 
-        - id: employee-service
+        - id: employee
           uri: http://localhost:8082
           predicates:
             - Path=/employees/**
           filters:
             - RewritePath=/employees/(?<segment>.*), /${segment}
 
-        - id: organization-service
+        - id: organization
           uri: http://localhost:8083
           predicates:
             - Path=/organizations/**
           filters:
             - RewritePath=/organizations/(?<segment>.*), /${segment}
+
+    config:
+      enabled: false
+    datasource:
+      url: jdbc:postgresql://localhost:5432/postgres
+      driverClassName: org.postgresql.Driver
+      username: postgres
+      password: admin
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+    jpa:
+      hibernate:
+        ddl-auto: update
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.PostgreSQLDialect

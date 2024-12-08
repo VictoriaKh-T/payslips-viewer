@@ -1,0 +1,66 @@
+version: '3.8'
+services:
+  grpc-server:
+    build:
+      context: ./grpc-server
+      dockerfile: Dockerfile
+    ports:
+      - "50051:50051"
+    networks:
+      - app-network
+
+  grpc-client:
+    build:
+      context: ./grpc-client
+      dockerfile: Dockerfile
+    depends_on:
+      - grpc-server
+    networks:
+      - app-network
+
+  person:
+    build:
+      context: ./person
+      dockerfile: Dockerfile
+    ports:
+      - "50053:50053"
+    networks:
+      - app-network
+
+  employee:
+    build:
+      context: ./employee
+      dockerfile: Dockerfile
+    ports:
+      - "50051:50051"
+    depends_on:
+      - person
+    networks:
+      - app-network
+
+  organization:
+    build:
+      context: ./organization
+      dockerfile: Dockerfile
+    ports:
+      - "50052:50052"
+    depends_on:
+      - person
+    networks:
+      - app-network
+
+  database:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: payroll_db
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

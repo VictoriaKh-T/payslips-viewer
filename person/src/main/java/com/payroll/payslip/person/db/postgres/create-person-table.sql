@@ -5,6 +5,6 @@ CREATE TABLE IF NOT EXISTS public.persons
     second_name VARCHAR(255),
     surname VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
-    date_birth DATE,
+    birth_date DATE,
     is_delete BOOLEAN
     );
