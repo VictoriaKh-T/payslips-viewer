@@ -10,10 +10,11 @@ option java_package = "com.payroll.payslip.proto";
        string first_name = 2;
        string sure_name = 3;
        string email = 4;
+       string birth_date = 5;
     }
 
     message GetPersonRequest {
-        int64 person_id = 1;
+        int64 id = 1;
     }
 
     message GetPersonResponse {

@@ -22,6 +22,7 @@ import com.payroll.payslip.employee.service.mapper.EmployeeDtoToEntityMapper;
 import com.payroll.payslip.grpc.client.EmployeeGrpcClient;
 import com.payroll.payslip.grpc.client.PersonGrpcClient;
 import com.payroll.payslip.proto.CreateEmployeeResponse;
+import com.payroll.payslip.proto.GetPersonResponse;
 
 @Service
 @AllArgsConstructor
@@ -37,6 +38,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
   @Override
   public CreateEmployeeResponseDto createEmployee(CreateEmployeeRequestDto request) {
+    GetPersonResponse person = personGrpcClient.getPersonById(request.personId());
+
     CreateEmployeeResponse employeeProtoResponse =
         employeeGrpcClient.createEmployee(
             createEmployeeRequestProto.CreateEmployeeRequestToProto(request));
