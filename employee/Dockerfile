@@ -1,7 +1,14 @@
-FROM openjdk:17
-LABEL authors="Viсtoria"
+FROM gradle:8.0.0-jdk18 AS builder
 
-COPY build/libs/*.jar app.jar
+WORKDIR /app
+COPY employee .
 
-EXPOSE 50051
+RUN gradle build --no-daemon
+
+# Stage 2: Final image
+FROM openjdk:18
+WORKDIR /app
+COPY --from=builder /app/build/libs/*.jar /app.jar
+
+EXPOSE 8082
 ENTRYPOINT ["java", "-jar", "app.jar"]

@@ -11,7 +11,7 @@ import com.payroll.payslip.person.model.entity.PersonEntity;
 @Repository
 public interface PersonPostgresRepository extends JpaRepository<PersonEntity, Long> {
 
-    Optional<PersonEntity> findPersonEntityByBirthDate(LocalDate bitrhDate);
+  Optional<PersonEntity> findPersonEntityByBirthDate(LocalDate bitrhDate);
 
-    Optional<PersonEntity> findPersonEntityByEmail(String email);
+  Optional<PersonEntity> findPersonEntityByEmail(String email);
 }

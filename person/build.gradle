@@ -4,53 +4,15 @@ plugins {
     id 'org.springframework.boot' version '3.2.4'
     id 'io.spring.dependency-management' version '1.1.4'
     id 'com.diffplug.spotless' version '6.11.0'
-    id 'checkstyle'
 }
 
 repositories {
     mavenCentral()
-    google()
-    gradlePluginPortal()
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-}
-
-
-checkstyle {
-
-    project.ext.checkstyleVersion = '10.17.0'
-    project.ext.sevntuChecksVersion = '1.44.1'
-
-    repositories {
-        mavenLocal()
-        mavenCentral()
-        // we keep artifacts in maven central too,
-        // but this is just example of usage from our old maven repo on github
-        maven {
-            url "https://sevntu-checkstyle.github.com/sevntu.checkstyle/maven2"
-        }
-    }
-
-    ignoreFailures = true
-    configFile = file("${project.rootDir}/checkstyle.xml")
-
-    checkstyleMain {
-        source = sourceSets.main.allSource
-    }
-
-    configurations {
-        checkstyle
-    }
-
-    dependencies{
-        assert project.hasProperty("checkstyleVersion")
-
-        checkstyle "com.puppycrawl.tools:checkstyle:${checkstyleVersion}"
-        checkstyle "com.github.sevntu-checkstyle:sevntu-checks:${sevntuChecksVersion}"
-    }
+    sourceCompatibility = JavaVersion.VERSION_18
+    targetCompatibility = JavaVersion.VERSION_18
 }
 
 dependencies {
@@ -60,12 +22,14 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation "org.springdoc:springdoc-openapi-ui:1.8.0"
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+    implementation 'org.hibernate:hibernate-core:6.4.4.Final'
 
     // db
     runtimeOnly 'org.postgresql:postgresql'
 
+
     // Lombok dependencies
-    compileOnly 'org.projectlombok:lombok:1.18.28'
+    implementation 'org.projectlombok:lombok:1.18.28'
     annotationProcessor 'org.projectlombok:lombok:1.18.28'
 
     // MapStruct dependencies
@@ -82,16 +46,38 @@ dependencies {
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 
-    checkstyle "com.puppycrawl.tools:checkstyle:${checkstyle.toolVersion}"
+    //checkstyle
+    implementation 'com.google.googlejavaformat:google-java-format:1.24.0'
+
 }
 
 tasks.test {
     useJUnitPlatform()
 }
 
-tasks.withType(Checkstyle) {
-    reports {
-        xml.required = false
-        html.required = true
+tasks.register('checkCodeCleanliness') {
+    dependsOn 'spotlessCheck'
+    doLast {
+        println 'Code Cleanliness Check Complete'
+    }
+}
+
+tasks.named('spotlessApply') {
+    doLast {
+        println 'Code Cleanliness Applied'
+    }
+}
+
+spotless {
+    java {
+        googleJavaFormat('1.24.0')
+
+        importOrder('java', 'javax', '', 'org', 'com')
+        removeUnusedImports()
+        trimTrailingWhitespace()
+        indentWithSpaces(4)
+        endWithNewline()
+
+        target 'src/main/java/**/*.java', 'src/test/java/**/*.java'
     }
 }

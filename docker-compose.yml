@@ -7,7 +7,7 @@ services:
     ports:
       - "50051:50051"
     networks:
-      - app-network
+      - payslips-network
 
   grpc-client:
     build:
@@ -16,38 +16,50 @@ services:
     depends_on:
       - grpc-server
     networks:
-      - app-network
+      - payslips-network
 
   person:
     build:
       context: ./person
       dockerfile: Dockerfile
     ports:
-      - "50053:50053"
+      - "8081:8081"
     networks:
-      - app-network
+      - payslips-network
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/postgres
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin
 
   employee:
     build:
       context: ./employee
       dockerfile: Dockerfile
     ports:
-      - "50051:50051"
+      - "8082:8082"
     depends_on:
       - person
     networks:
-      - app-network
+      - payslips-network
+    environment:
+       SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/postgres
+       SPRING_DATASOURCE_USERNAME: postgres
+       SPRING_DATASOURCE_PASSWORD: admin
 
   organization:
     build:
       context: ./organization
       dockerfile: Dockerfile
     ports:
-      - "50052:50052"
+      - "8083:8083"
     depends_on:
       - person
     networks:
-      - app-network
+      - payslips-network
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/postgres
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin
 
   database:
     image: postgres:15
@@ -59,8 +71,8 @@ services:
     ports:
       - "5432:5432"
     networks:
-      - app-network
+      - payslips-network
 
 networks:
-  app-network:
+  payslips-network:
     driver: bridge
