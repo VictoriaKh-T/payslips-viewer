@@ -5,15 +5,16 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
-rootProject.name = "payslip"
 
-include("person")
-include("organization")
-include("employee")
-include("gRPC-proto")
-include("gRPC-client")
-include("gRPC-server")
-include ("api-gateway")
+rootProject.name = 'payslip'
+
+include('person')
+include('organization')
+include('employee')
+include('gRPC-proto')
+include('gRPC-client')
+include('gRPC-server')
+include('api-gateway')
 
 
 

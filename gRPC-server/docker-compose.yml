@@ -1,0 +1,14 @@
+services:
+  grpc-server:
+    build:
+      context: .
+      dockerfile: ./gRPC-server/Dockerfile
+    ports:
+      - "9090:9090"
+    depends_on:
+      - grpc-client
+    networks:
+      - payslips-network
+networks:
+  payslips-network:
+    external: true

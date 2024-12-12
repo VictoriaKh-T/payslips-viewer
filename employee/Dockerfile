@@ -1,12 +1,16 @@
-FROM gradle:8.0.0-jdk18 AS builder
+# FROM gradle:8.11-jdk17 AS builder
 
-WORKDIR /app
-COPY employee .
+# WORKDIR /app
+# COPY settings.gradle .
+# COPY gRPC-proto ./gRPC-proto
+# COPY gRPC-server ./gRPC-server
+# COPY gRPC-client ./gRPC-client
+# COPY employee .
 
-RUN gradle build --no-daemon
+# RUN gradle build --no-daemon --exclude-task spotlessJava --exclude-task spotlessJavaCheck
 
 # Stage 2: Final image
-FROM openjdk:18
+FROM openjdk:17
 WORKDIR /app
 COPY --from=builder /app/build/libs/*.jar /app.jar
 

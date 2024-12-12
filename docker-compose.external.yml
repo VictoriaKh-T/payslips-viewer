@@ -1,0 +1,17 @@
+version: '3.9'
+services:
+  database:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: payroll_db
+    ports:
+      - "5432:5432"
+    networks:
+      - payslips-network
+
+networks:
+  payslips-network:
+    external: true

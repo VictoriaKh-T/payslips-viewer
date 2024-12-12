@@ -1,0 +1,18 @@
+services:
+  employee:
+    build:
+      context: .
+      dockerfile: ./employee/Dockerfile
+    ports:
+      - "8082:8082"
+    depends_on:
+      - person
+    networks:
+      - payslips-network
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/postgres
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin
+networks:
+  payslips-network:
+    external: true

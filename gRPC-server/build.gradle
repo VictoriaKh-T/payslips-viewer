@@ -10,10 +10,6 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
     implementation project(':gRPC-proto')
 
@@ -22,11 +18,10 @@ dependencies {
     implementation(libs.grpcProtobuf)
     implementation(libs.grpcNetty)
     implementation 'javax.annotation:javax.annotation-api:1.3.2'
-    implementation 'com.google.protobuf:protobuf-java:3.19.1'
+    implementation 'com.google.protobuf:protobuf-java:4.28.2'
     implementation 'net.devh:grpc-server-spring-boot-starter:3.1.0.RELEASE'
     implementation 'com.google.api.grpc:proto-google-common-protos:1.17.0'
 
-    // https://mvnrepository.com/artifact/com.google.googlejavaformat/google-java-format
     implementation("com.google.googlejavaformat:google-java-format:1.24.0")
 
     testImplementation 'org.apache.logging.log4j:log4j-slf4j2-impl:2.24.2'

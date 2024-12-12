@@ -1,14 +1,14 @@
-FROM gradle:8.0.0-jdk18 AS builder
+FROM gradle:8.11-jdk17 AS builder
 
 WORKDIR /app
-COPY person .
+COPY . .
 
-RUN gradle build --no-daemon
+RUN gradle build --no-daemon --exclude-task spotlessJava --exclude-task spotlessJavaCheck
 
 # Stage 2: Final image
-FROM openjdk:18
+FROM openjdk:17
 WORKDIR /app
-COPY --from=builder /app/build/libs/*.jar /app.jar
+COPY --from=builder /app/build/libs/*.jar app.jar
 
-EXPOSE 8081
+EXPOSE 8082
 ENTRYPOINT ["java", "-jar", "app.jar"]

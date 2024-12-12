@@ -1,0 +1,12 @@
+services:
+  grpc-client:
+    build:
+      context: .
+      dockerfile: ./gRPC-client/Dockerfile
+    ports:
+      - "8088:8088"
+    networks:
+      - payslips-network
+networks:
+  payslips-network:
+    external: true
