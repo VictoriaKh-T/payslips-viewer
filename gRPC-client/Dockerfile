@@ -9,7 +9,7 @@ COPY gRPC-client ./gRPC-client
 
 
 WORKDIR /app/gRPC-client
-RUN gradle build --no-daemon --exclude-task spotlessJava --exclude-task spotlessJavaCheck
+RUN gradle build --no-daemon
 
 # Final stage
 FROM openjdk:17
