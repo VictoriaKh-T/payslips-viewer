@@ -1,4 +1,4 @@
-version: '3.9'
+version: '3.8'
 services:
   database:
     image: postgres:15
@@ -18,8 +18,6 @@ services:
       dockerfile: ./organization/Dockerfile
     ports:
       - "8083:8083"
-    depends_on:
-      - person
     networks:
       - payslips-network
     environment:
@@ -29,7 +27,7 @@ services:
 
   person:
     build:
-      context: .
+      context: ./person
       dockerfile: Dockerfile
     ports:
       - "8081:8081"
@@ -42,8 +40,8 @@ services:
 
   grpc-client:
     build:
-      context: .
-      dockerfile: ./gRPC-client/Dockerfile
+     context:  gRPC-client
+     dockerfile: Dockerfile
     ports:
       - "8088:8088"
     networks:
