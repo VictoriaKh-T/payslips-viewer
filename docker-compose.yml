@@ -14,8 +14,8 @@ services:
 
   organization:
     build:
-      context: .
-      dockerfile: ./organization/Dockerfile
+      context: ./organization
+      dockerfile: Dockerfile
     ports:
       - "8083:8083"
     networks:
@@ -40,23 +40,26 @@ services:
 
   grpc-client:
     build:
-     context:  .
-     dockerfile: ./gRPC-client/Dockerfile
+     context:  ./
+     dockerfile: Dockerfile
     ports:
-      - "8088:8088"
+      - "9000:8094"
     networks:
       - payslips-network
 
   grpc-server:
     build:
-      context: .
-      dockerfile: ./gRPC-server/Dockerfile
+      context: ./
+      dockerfile: Dockerfile
     ports:
       - "9090:9090"
-    depends_on:
-      - grpc-client
     networks:
       - payslips-network
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/postgres
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin
+      GRPC-SERVER-PORT: 9090
 
 
   employee:
