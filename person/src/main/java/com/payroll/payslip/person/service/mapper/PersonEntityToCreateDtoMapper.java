@@ -10,9 +10,9 @@ import com.payroll.payslip.person.model.entity.PersonEntity;
 @Mapper
 public interface PersonEntityToCreateDtoMapper {
 
-    PersonEntityToCreateDtoMapper INSTANCE = Mappers.getMapper(PersonEntityToCreateDtoMapper.class);
+  PersonEntityToCreateDtoMapper INSTANCE = Mappers.getMapper(PersonEntityToCreateDtoMapper.class);
 
-    PersonEntity mapToEntity(CreatePersonRequest request);
+  PersonEntity mapToEntity(CreatePersonRequest request);
 
-    CreatePersonResponse mapToCreateResponse(PersonEntity entity);
+  CreatePersonResponse mapToCreateResponse(PersonEntity entity);
 }

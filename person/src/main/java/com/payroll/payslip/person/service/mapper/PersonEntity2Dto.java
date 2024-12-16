@@ -9,7 +9,7 @@ import com.payroll.payslip.person.model.entity.PersonEntity;
 @Mapper
 public interface PersonEntity2Dto {
 
-    PersonEntity2Dto INSTANCE = Mappers.getMapper(PersonEntity2Dto.class);
+  PersonEntity2Dto INSTANCE = Mappers.getMapper(PersonEntity2Dto.class);
 
-    PersonResponse mapToPersonResponse(PersonEntity entity);
+  PersonResponse mapToPersonResponse(PersonEntity entity);
 }
