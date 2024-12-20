@@ -16,36 +16,27 @@ import com.payroll.payslip.employee.model.dto.UpdateEmployeeRequest;
 import com.payroll.payslip.employee.model.dto.UpdateEmployeeResponse;
 import com.payroll.payslip.employee.model.entity.EmployeeEntity;
 import com.payroll.payslip.employee.persistence.repository.EmployeePostgresRepository;
-import com.payroll.payslip.employee.service.mapper.CreateEmployeeRequestProto;
-import com.payroll.payslip.employee.service.mapper.CreateEmployeeResponse2Proto;
 import com.payroll.payslip.employee.service.mapper.EmployeeDtoToEntityMapper;
 import com.payroll.payslip.grpc.client.EmployeeGrpcClient;
 import com.payroll.payslip.grpc.client.PersonGrpcClient;
-import com.payroll.payslip.proto.CreateEmployeeResponse;
 import com.payroll.payslip.proto.GetPersonResponse;
 
 @Service
 @AllArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
   private final EmployeeDtoToEntityMapper mapper = EmployeeDtoToEntityMapper.INSTANCE;
-  private final CreateEmployeeRequestProto createEmployeeRequestProto =
-      CreateEmployeeRequestProto.INSTANCE;
-  private final CreateEmployeeResponse2Proto createEmployeeResponse2Proto =
-      CreateEmployeeResponse2Proto.INSTANCE;
   private final EmployeePostgresRepository repository;
   private final PersonGrpcClient personGrpcClient;
   private final EmployeeGrpcClient employeeGrpcClient;
 
   @Override
   public CreateEmployeeResponseDto createEmployee(CreateEmployeeRequestDto request) {
-    GetPersonResponse person = personGrpcClient.getPersonById(request.personId());
+   GetPersonResponse getPersonResponse = personGrpcClient.getPersonById(request.personId());
 
-    CreateEmployeeResponse employeeProtoResponse =
-        employeeGrpcClient.createEmployee(
-            createEmployeeRequestProto.CreateEmployeeRequestToProto(request));
-    CreateEmployeeResponseDto responseDto =
-        createEmployeeResponse2Proto.toCreateEmployeeResponseDto(employeeProtoResponse);
-    EmployeeEntity employeeEntity = mapper.createEmployeeResponseToEntity(responseDto);
+    EmployeeEntity employeeEntity = new EmployeeEntity();
+    employeeEntity.setPersonId(getPersonResponse.getId());
+    employeeEntity.setFulltName(getPersonResponse.getFirstName() + " " + getPersonResponse.getSureName());
+
     return mapper.mapToCreateResponse(repository.save(employeeEntity));
   }
 

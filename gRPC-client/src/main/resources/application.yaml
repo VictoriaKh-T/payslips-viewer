@@ -17,9 +17,7 @@ grpc:
       enableKeepAlive: true
       keepAliveWithoutCalls: true
       negotiationType: plaintext
-
   server:
     port: 9090
 
-server:
-  port: 8094
+

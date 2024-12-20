@@ -8,13 +8,13 @@ plugins {
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
 }
-
 
 dependencies {
     // Spring Boot dependencies
@@ -28,7 +28,6 @@ dependencies {
     // db
     runtimeOnly 'org.postgresql:postgresql'
 
-
     // Lombok dependencies
     implementation 'org.projectlombok:lombok:1.18.28'
     annotationProcessor 'org.projectlombok:lombok:1.18.28'
@@ -37,11 +36,7 @@ dependencies {
     implementation 'org.mapstruct:mapstruct:1.6.2'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.2'
 
-    // Jakarta dependencies
-    implementation 'jakarta.annotation:jakarta.annotation-api:3.0.0'
-    implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
-    implementation 'jakarta.json.bind:jakarta.json.bind-api:3.0.1'
-    implementation 'jakarta.persistence:jakarta.persistence-api:3.1.0'
+    implementation 'javax.annotation:javax.annotation-api:1.3.2'
 
     // JUnit for testing
     testImplementation platform('org.junit:junit-bom:5.9.1')
@@ -50,47 +45,28 @@ dependencies {
     //checkstyle
     implementation 'com.google.googlejavaformat:google-java-format:1.24.0'
 
+    implementation 'com.google.protobuf:protobuf-java:3.21.12'
+
     //grpc
     implementation project(':gRPC-client')
     implementation project(':gRPC-server')
     implementation project(':gRPC-proto')
+}
 
-    implementation(libs.grpcApi)
-    implementation(libs.grpcStub)
-    implementation(libs.grpcProtobuf)
-    implementation(libs.grpcNetty)
-
-    implementation 'javax.annotation:javax.annotation-api:1.3.2'
-
+sourceSets {
+    main {
+        java {
+            def path = "build/generated/sources/proto/main"
+            srcDirs "${path}/grpc"
+            srcDirs "${path}/java"
+        }
+    }
 }
 
 tasks.test {
     useJUnitPlatform()
 }
 
-tasks.register('checkCodeCleanliness') {
-    dependsOn 'spotlessCheck'
-    doLast {
-        println 'Code Cleanliness Check Complete'
-    }
-}
-
-tasks.named('spotlessApply') {
-    doLast {
-        println 'Code Cleanliness Applied'
-    }
-}
-
-spotless {
-    java {
-        googleJavaFormat('1.24.0')
-
-        importOrder('java', 'javax', '', 'org', 'com')
-        removeUnusedImports()
-        trimTrailingWhitespace()
-        indentWithSpaces(4)
-        endWithNewline()
-
-        target 'src/main/java/**/*.java', 'src/test/java/**/*.java'
-    }
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs += '-Amapstruct.verbose=true'
 }

@@ -5,12 +5,10 @@ import com.payroll.payslip.proto.CreateEmployeeResponse;
 import com.payroll.payslip.proto.EmployeeDataServiceGrpc;
 import com.payroll.payslip.proto.GetEmployeeRequest;
 import com.payroll.payslip.proto.GetEmployeeResponse;
-import io.grpc.ManagedChannel;
 import net.devh.boot.grpc.client.inject.GrpcClient;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class EmployeeGrpcClient {
 
     @GrpcClient("employee-server")

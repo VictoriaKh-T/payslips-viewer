@@ -4,10 +4,10 @@ import com.payroll.payslip.proto.GetPersonRequest;
 import com.payroll.payslip.proto.GetPersonResponse;
 import com.payroll.payslip.proto.PersonDataServiceGrpc;
 import net.devh.boot.grpc.client.inject.GrpcClient;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 
-@Component
+@Service
 public class PersonGrpcClient {
 
     @GrpcClient("person-server")

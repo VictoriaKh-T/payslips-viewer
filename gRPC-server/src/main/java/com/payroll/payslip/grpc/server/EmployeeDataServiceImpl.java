@@ -38,8 +38,8 @@ public class EmployeeDataServiceImpl extends EmployeeDataServiceGrpc.EmployeeDat
 
     GetPersonResponse personResponse = personStub.getPersonById(getPersonRequest);
 
-    String firstName = personResponse.getPerson().getFirstName();
-    String sureName = personResponse.getPerson().getSureName();
+    String firstName = personResponse.getFirstName();
+    String sureName = personResponse.getSureName();
     String fullName = sureName + " " + firstName;
 
     logger.info("first name: " + firstName);

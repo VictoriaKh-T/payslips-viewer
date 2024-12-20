@@ -14,8 +14,9 @@ public class PersonDataServiceImpl extends PersonDataServiceGrpc.PersonDataServi
   @Override
   public void getPersonById(
       GetPersonRequest request, StreamObserver<GetPersonResponse> responseObserver) {
-    Person person = Person.newBuilder().setId(request.getId()).build();
-    GetPersonResponse response = GetPersonResponse.newBuilder().setPerson(person).build();
+    GetPersonResponse response = GetPersonResponse.newBuilder()
+            .setId(request.getId())
+            .build();
     responseObserver.onNext(response);
     responseObserver.onCompleted();
   }

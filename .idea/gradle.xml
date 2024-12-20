@@ -6,7 +6,7 @@
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="gradleHome" value="C:/Gradle/gradle-8.11" />
-        <option name="gradleJvm" value="17" />
+        <option name="gradleJvm" value="18" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
@@ -24,34 +24,33 @@
         <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/api-gateway" />
         <option name="gradleHome" value="C:/Gradle/gradle-8.11" />
-        <option name="gradleJvm" value="17" />
+        <option name="gradleJvm" value="18" />
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/gRPC-client" />
         <option name="gradleHome" value="C:/Gradle/gradle-8.11" />
-        <option name="gradleJvm" value="17" />
+        <option name="gradleJvm" value="18" />
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/gRPC-proto" />
         <option name="gradleHome" value="C:/Gradle/gradle-8.11" />
-        <option name="gradleJvm" value="17" />
+        <option name="gradleJvm" value="18" />
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/gRPC-server" />
         <option name="gradleHome" value="C:/Gradle/gradle-8.11" />
-        <option name="gradleJvm" value="17" />
+        <option name="gradleJvm" value="18" />
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/grpc-server" />
         <option name="gradleHome" value="C:/Gradle/gradle-8.11" />
-        <option name="gradleJvm" value="17" />
+        <option name="gradleJvm" value="18" />
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/proto" />
         <option name="gradleHome" value="C:/Gradle/gradle-8.11" />
-        <option name="gradleJvm" value="17" />
+        <option name="gradleJvm" value="18" />
       </GradleProjectSettings>
     </option>
-    <option name="offlineMode" value="true" />
   </component>
 </project>
