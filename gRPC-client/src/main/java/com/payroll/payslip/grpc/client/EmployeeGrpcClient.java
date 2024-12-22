@@ -6,15 +6,18 @@ import com.payroll.payslip.proto.EmployeeDataServiceGrpc;
 import com.payroll.payslip.proto.GetEmployeeRequest;
 import com.payroll.payslip.proto.GetEmployeeResponse;
 import io.grpc.ManagedChannel;
-import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
 public class EmployeeGrpcClient {
 
-    @GrpcClient("employee-server")
-    private EmployeeDataServiceGrpc.EmployeeDataServiceBlockingStub employeeStub;
+
+    private final EmployeeDataServiceGrpc.EmployeeDataServiceBlockingStub employeeStub;
+
+    public EmployeeGrpcClient(@Qualifier("employeeChannel") ManagedChannel employeeChannel) {
+        this.employeeStub = EmployeeDataServiceGrpc.newBlockingStub(employeeChannel);
+    }
 
     public GetEmployeeResponse getEmployeeById(long employeeId) {
         GetEmployeeRequest request = GetEmployeeRequest.newBuilder()

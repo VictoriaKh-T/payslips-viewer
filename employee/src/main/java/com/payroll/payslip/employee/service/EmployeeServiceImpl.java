@@ -35,7 +35,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     EmployeeEntity employeeEntity = new EmployeeEntity();
     employeeEntity.setPersonId(getPersonResponse.getId());
-    employeeEntity.setFulltName(getPersonResponse.getFirstName() + " " + getPersonResponse.getSureName());
+    employeeEntity.setFulltName(
+        getPersonResponse.getFirstName() + " " + getPersonResponse.getSureName());
 
     return mapper.mapToCreateResponse(repository.save(employeeEntity));
   }

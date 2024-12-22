@@ -10,8 +10,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class OrganizationGrpcClient {
-    @GrpcClient("organization-server")
-    private OrganizationDataServiceGrpc.OrganizationDataServiceBlockingStub organizationStub;
+    private final OrganizationDataServiceGrpc.OrganizationDataServiceBlockingStub organizationStub;
+
+    public OrganizationGrpcClient(@Qualifier("organizationChannel") ManagedChannel organizationChannel) {
+        this.organizationStub = OrganizationDataServiceGrpc.newBlockingStub(organizationChannel);
+    }
 
     public GetOrganizationResponse getOrganizationById(int organizationId) {
         GetOrganizationRequest request = GetOrganizationRequest.newBuilder()

@@ -15,6 +15,7 @@ repositories {
 }
 
 dependencies {
+    implementation(libs.grpcApi)
     implementation(libs.grpcStub)
     implementation(libs.grpcProtobuf)
     implementation(libs.grpcNetty)

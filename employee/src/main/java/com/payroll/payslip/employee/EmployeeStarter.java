@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "com.payroll.payslip.grpc")
+@ComponentScan(basePackages = "com.payroll.payslip")
 public class EmployeeStarter {
   public static void main(String[] args) {
     SpringApplication.run(EmployeeStarter.class, args);
