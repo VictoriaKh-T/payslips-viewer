@@ -52,6 +52,5 @@
         <option name="gradleJvm" value="17" />
       </GradleProjectSettings>
     </option>
-    <option name="offlineMode" value="true" />
   </component>
 </project>
