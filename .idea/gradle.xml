@@ -14,7 +14,6 @@
             <option value="$PROJECT_DIR$/employee" />
             <option value="$PROJECT_DIR$/gRPC-client" />
             <option value="$PROJECT_DIR$/gRPC-proto" />
-            <option value="$PROJECT_DIR$/gRPC-server" />
             <option value="$PROJECT_DIR$/organization" />
             <option value="$PROJECT_DIR$/person" />
           </set>

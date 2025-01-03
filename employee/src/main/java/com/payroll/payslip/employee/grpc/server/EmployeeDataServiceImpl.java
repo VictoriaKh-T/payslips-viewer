@@ -1,10 +1,9 @@
-package com.payroll.payslip.grpc.server;
-
-import javax.annotation.PostConstruct;
+package com.payroll.payslip.employee.grpc.server;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
+import jakarta.annotation.PostConstruct;
 import net.devh.boot.grpc.server.service.GrpcService;
 
 import org.slf4j.Logger;

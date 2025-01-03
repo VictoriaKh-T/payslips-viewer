@@ -1,4 +1,4 @@
-package com.payroll.payslip.grpc.server;
+package com.payroll.payslip.organization.grpc.server;
 
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;

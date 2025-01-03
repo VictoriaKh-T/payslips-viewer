@@ -2,4 +2,4 @@ server:
   port: 8082
 grpc:
   server:
-    port: 9090
+    port: 50051
