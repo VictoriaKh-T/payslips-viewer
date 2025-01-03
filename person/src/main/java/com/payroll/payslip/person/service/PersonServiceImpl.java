@@ -3,6 +3,8 @@ package com.payroll.payslip.person.service;
 import java.time.LocalDate;
 import java.util.List;
 
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
 
 import com.payroll.payslip.person.exception.PersonNotFoundException;
@@ -18,15 +20,12 @@ import com.payroll.payslip.person.service.mapper.PersonEntityToCreateDtoMapper;
 import com.payroll.payslip.person.service.mapper.PersonEntityToUpdateDtoMapper;
 
 @Service
+@RequiredArgsConstructor
 public class PersonServiceImpl implements PersonService {
   private final PersonPostgresRepository repository;
   private final PersonEntityToCreateDtoMapper createMapper = PersonEntityToCreateDtoMapper.INSTANCE;
   private final PersonEntityToUpdateDtoMapper updateMapper = PersonEntityToUpdateDtoMapper.INSTANCE;
   private final PersonEntity2Dto mapper = PersonEntity2Dto.INSTANCE;
-
-  public PersonServiceImpl(PersonPostgresRepository repository) {
-    this.repository = repository;
-  }
 
   @Override
   public CreatePersonResponse createPerson(CreatePersonRequest request) {

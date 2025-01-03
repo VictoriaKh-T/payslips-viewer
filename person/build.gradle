@@ -49,6 +49,11 @@ dependencies {
     //checkstyle
     implementation 'com.google.googlejavaformat:google-java-format:1.24.0'
 
+    implementation(libs.grpcApi)
+    implementation(libs.grpcStub)
+    implementation(libs.grpcProtobuf)
+    implementation(libs.grpcNetty)
+
 }
 
 tasks.test {
@@ -79,5 +84,7 @@ spotless {
         endWithNewline()
 
         target 'src/main/java/**/*.java', 'src/test/java/**/*.java'
+        targetExclude '**/*.git/**'
+        lineEndings = 'WINDOWS'
     }
 }

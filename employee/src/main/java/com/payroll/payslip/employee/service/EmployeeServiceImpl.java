@@ -4,6 +4,8 @@ import java.util.List;
 
 import lombok.AllArgsConstructor;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.payroll.payslip.employee.exception.EmployeeNotFoundException;
@@ -29,9 +31,14 @@ public class EmployeeServiceImpl implements EmployeeService {
   private final PersonGrpcClient personGrpcClient;
   private final EmployeeGrpcClient employeeGrpcClient;
 
+  private final Logger logger = LoggerFactory.getLogger(EmployeeServiceImpl.class);
+
   @Override
   public CreateEmployeeResponseDto createEmployee(CreateEmployeeRequestDto request) {
     GetPersonResponse getPersonResponse = personGrpcClient.getPersonById(request.personId());
+
+    logger.info(
+        "person data: {}, {}", getPersonResponse.getFirstName(), getPersonResponse.getSureName());
 
     EmployeeEntity employeeEntity = new EmployeeEntity();
     employeeEntity.setPersonId(getPersonResponse.getId());

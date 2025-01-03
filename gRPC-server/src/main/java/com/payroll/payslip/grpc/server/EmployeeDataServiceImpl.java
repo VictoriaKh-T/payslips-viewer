@@ -1,5 +1,7 @@
 package com.payroll.payslip.grpc.server;
 
+import javax.annotation.PostConstruct;
+
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
@@ -21,10 +23,14 @@ import com.payroll.payslip.proto.PersonDataServiceGrpc;
 @GrpcService
 public class EmployeeDataServiceImpl extends EmployeeDataServiceGrpc.EmployeeDataServiceImplBase {
 
-  private final ManagedChannel personChannel =
-      ManagedChannelBuilder.forAddress("localhost", 50053).usePlaintext().build();
-  private final PersonDataServiceGrpc.PersonDataServiceBlockingStub personStub =
-      PersonDataServiceGrpc.newBlockingStub(personChannel);
+  private ManagedChannel personChannel;
+  private PersonDataServiceGrpc.PersonDataServiceBlockingStub personStub;
+
+  @PostConstruct
+  public void init() {
+    personChannel = ManagedChannelBuilder.forAddress("localhost", 50053).usePlaintext().build();
+    personStub = PersonDataServiceGrpc.newBlockingStub(personChannel);
+  }
 
   private Logger logger = LoggerFactory.getLogger(EmployeeDataServiceImpl.class);
 
