@@ -3,4 +3,8 @@ package com.payroll.payslip.employee.model.dto;
 import java.time.LocalDate;
 
 public record CreateEmployeeRequestDto(
-    Long personId, Long organizationId, LocalDate emplDate, LocalDate disDate) {}
+    String fullName,
+    LocalDate employmentDate,
+    LocalDate dismissDate,
+    Long personId,
+    Long organizationId) {}

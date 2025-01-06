@@ -27,7 +27,7 @@ public class EmployeeEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @NonNull private String fulltName;
+  @NonNull private String fullName;
 
   @NonNull private LocalDate employmentDate;
 

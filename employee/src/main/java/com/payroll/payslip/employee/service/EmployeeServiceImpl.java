@@ -42,8 +42,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     EmployeeEntity employeeEntity = new EmployeeEntity();
     employeeEntity.setPersonId(getPersonResponse.getId());
-    employeeEntity.setFulltName(
+    employeeEntity.setFullName(
         getPersonResponse.getFirstName() + " " + getPersonResponse.getSureName());
+    employeeEntity.setEmploymentDate(request.employmentDate());
 
     return mapper.mapToCreateResponse(repository.save(employeeEntity));
   }
@@ -57,9 +58,9 @@ public class EmployeeServiceImpl implements EmployeeService {
                 () -> new EmployeeNotFoundException("can`t find employee by id " + employeeId));
     employeeEntity.setPersonId(request.personId());
     employeeEntity.setOrganizationId(request.organizationId());
-    employeeEntity.setFulltName(request.fullName());
-    employeeEntity.setEmploymentDate(request.emplDate());
-    employeeEntity.setDismissDate(request.disDate());
+    employeeEntity.setFullName(request.fullName());
+    employeeEntity.setEmploymentDate(request.employmentDate());
+    employeeEntity.setDismissDate(request.dismissDate());
     repository.save(employeeEntity);
     return mapper.mapToUpdateResponse(employeeEntity);
   }
