@@ -4,6 +4,7 @@ import com.payroll.payslip.proto.GetOrganizationRequest;
 import com.payroll.payslip.proto.GetOrganizationResponse;
 import com.payroll.payslip.proto.OrganizationDataServiceGrpc;
 import io.grpc.ManagedChannel;
+import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 

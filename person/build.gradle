@@ -4,13 +4,11 @@ plugins {
     id 'org.springframework.boot' version '3.2.4'
     id 'io.spring.dependency-management' version '1.1.4'
     id 'com.diffplug.spotless' version '6.11.0'
-    id 'checkstyle'
+    id 'com.google.protobuf' version '0.9.4'
 }
 
 repositories {
     mavenCentral()
-    google()
-    gradlePluginPortal()
 }
 
 java {
@@ -18,80 +16,93 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
-
-checkstyle {
-
-    project.ext.checkstyleVersion = '10.17.0'
-    project.ext.sevntuChecksVersion = '1.44.1'
-
-    repositories {
-        mavenLocal()
-        mavenCentral()
-        // we keep artifacts in maven central too,
-        // but this is just example of usage from our old maven repo on github
-        maven {
-            url "https://sevntu-checkstyle.github.com/sevntu.checkstyle/maven2"
-        }
-    }
-
-    ignoreFailures = true
-    configFile = file("${project.rootDir}/checkstyle.xml")
-
-    checkstyleMain {
-        source = sourceSets.main.allSource
-    }
-
-    configurations {
-        checkstyle
-    }
-
-    dependencies{
-        assert project.hasProperty("checkstyleVersion")
-
-        checkstyle "com.puppycrawl.tools:checkstyle:${checkstyleVersion}"
-        checkstyle "com.github.sevntu-checkstyle:sevntu-checks:${sevntuChecksVersion}"
-    }
-}
-
 dependencies {
-    // Spring Boot dependencies
+//<editor-fold desc="Spring Boot dependencies">
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation "org.springdoc:springdoc-openapi-ui:1.8.0"
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+    implementation 'org.hibernate:hibernate-core:6.4.4.Final'
+//</editor-fold>
 
-    // db
+//<editor-fold desc="db">
     runtimeOnly 'org.postgresql:postgresql'
+//</editor-fold>
 
-    // Lombok dependencies
-    compileOnly 'org.projectlombok:lombok:1.18.28'
+//<editor-fold desc="Lombok dependencies">
+    implementation 'org.projectlombok:lombok:1.18.28'
     annotationProcessor 'org.projectlombok:lombok:1.18.28'
+//</editor-fold>
 
-    // MapStruct dependencies
+//<editor-fold desc="MapStruct dependencies">
     implementation 'org.mapstruct:mapstruct:1.6.2'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.2'
+//</editor-fold>
 
-    // Jakarta dependencies
+//<editor-fold desc="Jakarta dependencies">
     implementation 'jakarta.annotation:jakarta.annotation-api:3.0.0'
     implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
     implementation 'jakarta.json.bind:jakarta.json.bind-api:3.0.1'
     implementation 'jakarta.persistence:jakarta.persistence-api:3.1.0'
+//</editor-fold>
 
-    // JUnit for testing
+//<editor-fold desc="JUnit for testing">
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+//</editor-fold>
 
-    checkstyle "com.puppycrawl.tools:checkstyle:${checkstyle.toolVersion}"
+//<editor-fold desc="checkstyle">
+    implementation 'com.google.googlejavaformat:google-java-format:1.24.0'
+//</editor-fold>
+
+
+    //grpc
+    implementation(libs.grpcApi)
+    implementation(libs.grpcStub)
+    implementation(libs.grpcProtobuf)
+    implementation(libs.grpcNetty)
+
+    implementation 'io.grpc:grpc-netty-shaded:1.69.0'
+
+    implementation project(':gRPC-proto')
+    implementation 'com.google.protobuf:protobuf-java:4.28.2'
+    implementation 'com.google.api.grpc:proto-google-common-protos:1.17.0'
+
+    implementation 'net.devh:grpc-client-spring-boot-starter:3.1.0.RELEASE'
+    implementation 'net.devh:grpc-server-spring-boot-starter:3.1.0.RELEASE'
+
 }
 
 tasks.test {
     useJUnitPlatform()
 }
 
-tasks.withType(Checkstyle) {
-    reports {
-        xml.required = false
-        html.required = true
+tasks.register('checkCodeCleanliness') {
+    dependsOn 'spotlessCheck'
+    doLast {
+        println 'Code Cleanliness Check Complete'
+    }
+}
+
+tasks.named('spotlessApply') {
+    doLast {
+        println 'Code Cleanliness Applied'
+    }
+}
+
+spotless {
+    java {
+        googleJavaFormat('1.24.0')
+
+        importOrder('java', 'javax', '', 'org', 'com')
+        removeUnusedImports()
+        trimTrailingWhitespace()
+        indentWithSpaces(4)
+        endWithNewline()
+
+        target 'src/main/java/**/*.java', 'src/test/java/**/*.java'
+        targetExclude '**/*.git/**'
+        lineEndings = 'WINDOWS'
     }
 }

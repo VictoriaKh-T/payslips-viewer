@@ -7,19 +7,33 @@ import io.grpc.ManagedChannel;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 @Component
 public class PersonGrpcClient {
+    private static final Logger logger = LoggerFactory.getLogger(PersonGrpcClient.class);
+
     private final PersonDataServiceGrpc.PersonDataServiceBlockingStub personStub;
 
     public PersonGrpcClient(@Qualifier("personChannel") ManagedChannel personChannel) {
         this.personStub = PersonDataServiceGrpc.newBlockingStub(personChannel);
     }
 
-    public GetPersonResponse getPersonById(int personId) {
+    public GetPersonResponse getPersonById(long personId) {
+
+        if (personStub == null) {
+            logger.error("Person stub is not initialized");
+            return null;
+        }
+
+        logger.info("Requesting person by ID: " + personId);
+        logger.info("Using grpc server address: " + personStub.getChannel().toString());
         GetPersonRequest request = GetPersonRequest.newBuilder()
-                .setPersonId(personId)
+                .setId(personId)
                 .build();
+        logger.info(String.format("Server sent a response: %1s", request.getId()));
         return personStub.getPersonById(request);
     }
 }

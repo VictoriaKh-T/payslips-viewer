@@ -1,0 +1,20 @@
+grpc:
+  client:
+    employee-server:
+      address: 'localhost:50051'
+      enableKeepAlive: true
+      keepAliveWithoutCalls: true
+      negotiationType: plaintext
+
+    person-server:
+      address: 'localhost:50053'
+      enableKeepAlive: true
+      keepAliveWithoutCalls: true
+      negotiationType: plaintext
+
+    organization-server:
+      address: 'localhost:50052'
+      enableKeepAlive: true
+      keepAliveWithoutCalls: true
+      negotiationType: plaintext
+

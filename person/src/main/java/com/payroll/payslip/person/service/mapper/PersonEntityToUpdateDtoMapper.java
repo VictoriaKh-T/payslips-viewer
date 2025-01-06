@@ -9,7 +9,7 @@ import com.payroll.payslip.person.model.entity.PersonEntity;
 @Mapper
 public interface PersonEntityToUpdateDtoMapper {
 
-    PersonEntityToUpdateDtoMapper INSTANCE = Mappers.getMapper(PersonEntityToUpdateDtoMapper.class);
+  PersonEntityToUpdateDtoMapper INSTANCE = Mappers.getMapper(PersonEntityToUpdateDtoMapper.class);
 
-    UpdatePersonResponse mapToPersonUpdateResponse(PersonEntity entity);
+  UpdatePersonResponse mapToPersonUpdateResponse(PersonEntity entity);
 }
