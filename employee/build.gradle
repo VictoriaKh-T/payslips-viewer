@@ -15,6 +15,8 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
+def spotlessLibVersion = "3.0.0"
+def spotlessVersion = "7.0.0"
 
 dependencies {
 //<editor-fold desc="Spring Boot dependencies">
@@ -57,7 +59,7 @@ dependencies {
 //</editor-fold>
 
 
-    //grpc
+//<editor-fold desc=grpc>
     implementation(libs.grpcApi)
     implementation(libs.grpcStub)
     implementation(libs.grpcProtobuf)
@@ -65,15 +67,19 @@ dependencies {
 
     implementation 'io.grpc:grpc-netty-shaded:1.69.0'
 
+    implementation project(':gRPC-proto')
+    implementation project(':gRPC-client')
+
     implementation 'com.google.protobuf:protobuf-java:4.28.2'
     implementation 'com.google.api.grpc:proto-google-common-protos:1.17.0'
 
     implementation 'net.devh:grpc-client-spring-boot-starter:3.1.0.RELEASE'
     implementation 'net.devh:grpc-server-spring-boot-starter:3.1.0.RELEASE'
 
-    //grpc
-    implementation project(':gRPC-client')
-    implementation project(':gRPC-proto')
+//</editor-fold>
+
+    implementation("com.diffplug.spotless:spotless-lib:${spotlessLibVersion}")
+    implementation("com.diffplug.spotless:spotless-plugin-gradle:${spotlessVersion}")
 
 }
 
@@ -81,31 +87,16 @@ tasks.test {
     useJUnitPlatform()
 }
 
-tasks.register('checkCodeCleanliness') {
-    dependsOn 'spotlessCheck'
-    doLast {
-        println 'Code Cleanliness Check Complete'
-    }
-}
-
-tasks.named('spotlessApply') {
-    doLast {
-        println 'Code Cleanliness Applied'
-    }
-}
-
 spotless {
     java {
-        googleJavaFormat('1.24.0')
-
-        importOrder('java', 'javax', '', 'org', 'com')
+        target fileTree('.') {
+            include '**/*.java'
+            exclude '**/build/**', '**/build-*/**'
+        }
+        toggleOffOn()
+        palantirJavaFormat()
         removeUnusedImports()
         trimTrailingWhitespace()
-        indentWithSpaces(4)
         endWithNewline()
-
-        target 'src/main/java/**/*.java', 'src/test/java/**/*.java'
-        targetExclude '**/*.git/**'
-        lineEndings = 'WINDOWS'
     }
 }

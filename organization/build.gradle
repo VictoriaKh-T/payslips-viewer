@@ -3,7 +3,7 @@ plugins {
     id 'application'
     id 'org.springframework.boot' version '3.2.4'
     id 'io.spring.dependency-management' version '1.1.4'
-    id 'com.diffplug.spotless' version '6.11.0'
+    id 'com.diffplug.spotless' version '6.25.0'
 }
 
 repositories {
@@ -15,6 +15,8 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
+def spotlessLibVersion = "3.0.0"
+def spotlessVersion = "7.0.0"
 
 dependencies {
 //<editor-fold desc="Spring Boot dependencies">
@@ -56,8 +58,12 @@ dependencies {
     implementation 'com.google.googlejavaformat:google-java-format:1.24.0'
 //</editor-fold>
 
+//<editor-fold desc="checkstyle">
+    implementation 'com.google.googlejavaformat:google-java-format:1.24.0'
+//</editor-fold>
 
-    //grpc
+
+//<editor-fold desc=grpc>
     implementation(libs.grpcApi)
     implementation(libs.grpcStub)
     implementation(libs.grpcProtobuf)
@@ -72,35 +78,27 @@ dependencies {
     implementation 'net.devh:grpc-client-spring-boot-starter:3.1.0.RELEASE'
     implementation 'net.devh:grpc-server-spring-boot-starter:3.1.0.RELEASE'
 
+//</editor-fold>
+
+    implementation("com.diffplug.spotless:spotless-lib:${spotlessLibVersion}")
+    implementation("com.diffplug.spotless:spotless-plugin-gradle:${spotlessVersion}")
+
 }
 
 tasks.test {
     useJUnitPlatform()
 }
 
-tasks.register('checkCodeCleanliness') {
-    dependsOn 'spotlessCheck'
-    doLast {
-        println 'Code Cleanliness Check Complete'
-    }
-}
-
-tasks.named('spotlessApply') {
-    doLast {
-        println 'Code Cleanliness Applied'
-    }
-}
-
 spotless {
     java {
-        googleJavaFormat('1.24.0')
-
-        importOrder('java', 'javax', '', 'org', 'com')
+        target fileTree('.') {
+            include '**/*.java'
+            exclude '**/build/**', '**/build-*/**'
+        }
+        toggleOffOn()
+        palantirJavaFormat()
         removeUnusedImports()
         trimTrailingWhitespace()
-        indentWithSpaces(4)
         endWithNewline()
-
-        target 'src/main/java/**/*.java', 'src/test/java/**/*.java'
     }
 }

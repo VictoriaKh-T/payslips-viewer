@@ -3,6 +3,7 @@ plugins {
     id 'application'
     id 'org.springframework.boot' version '3.2.4'
     id 'io.spring.dependency-management' version '1.1.4'
+    id 'com.diffplug.spotless' version '6.25.0'
 }
 
 java {
@@ -17,6 +18,9 @@ repositories {
 ext {
     set('springCloudVersion', "2023.0.2")
 }
+
+def spotlessLibVersion = "3.0.0"
+def spotlessVersion = "7.0.0"
 
 
 dependencies {
@@ -45,14 +49,13 @@ dependencies {
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 
+    implementation("com.diffplug.spotless:spotless-lib:${spotlessLibVersion}")
+    implementation("com.diffplug.spotless:spotless-plugin-gradle:${spotlessVersion}")
+
 }
 
 dependencyManagement {
     imports {
         mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
     }
-}
-
-tasks.named('test') {
-    useJUnitPlatform()
 }
