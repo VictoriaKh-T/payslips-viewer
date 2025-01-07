@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class EmployeeGrpcClient {
 
-
     private final EmployeeDataServiceGrpc.EmployeeDataServiceBlockingStub employeeStub;
 
     public EmployeeGrpcClient(@Qualifier("employeeChannel") ManagedChannel employeeChannel) {
