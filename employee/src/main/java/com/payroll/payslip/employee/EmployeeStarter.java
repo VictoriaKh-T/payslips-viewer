@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan(basePackages = "com.payroll.payslip")
 public class EmployeeStarter {
-  public static void main(String[] args) {
-    SpringApplication.run(EmployeeStarter.class, args);
-  }
+    public static void main(String[] args) {
+        SpringApplication.run(EmployeeStarter.class, args);
+    }
 }
