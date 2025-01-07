@@ -4,12 +4,10 @@ import com.payroll.payslip.proto.GetPersonRequest;
 import com.payroll.payslip.proto.GetPersonResponse;
 import com.payroll.payslip.proto.PersonDataServiceGrpc;
 import io.grpc.ManagedChannel;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 @Component
 public class PersonGrpcClient {
@@ -30,9 +28,7 @@ public class PersonGrpcClient {
 
         logger.info("Requesting person by ID: " + personId);
         logger.info("Using grpc server address: " + personStub.getChannel().toString());
-        GetPersonRequest request = GetPersonRequest.newBuilder()
-                .setId(personId)
-                .build();
+        GetPersonRequest request = GetPersonRequest.newBuilder().setId(personId).build();
         logger.info(String.format("Server sent a response: %1s", request.getId()));
         return personStub.getPersonById(request);
     }

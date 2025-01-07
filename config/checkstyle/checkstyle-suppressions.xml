@@ -1,6 +1,0 @@
-<?xmlversion="1.0"?>
-
-<suppressions>
-    <suppresschecks="FileLength"
-    files="FooBar.java"/>
-</suppressions>

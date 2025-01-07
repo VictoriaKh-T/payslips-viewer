@@ -19,9 +19,8 @@ public class EmployeeGrpcClient {
     }
 
     public GetEmployeeResponse getEmployeeById(long employeeId) {
-        GetEmployeeRequest request = GetEmployeeRequest.newBuilder()
-                .setEmployeeId(employeeId)
-                .build();
+        GetEmployeeRequest request =
+                GetEmployeeRequest.newBuilder().setEmployeeId(employeeId).build();
         return employeeStub.getEmployeeById(request);
     }
 
