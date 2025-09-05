@@ -28,4 +28,11 @@ public class GrpcConfiguration {
                 .usePlaintext()
                 .build();
     }
+
+    @Bean(name = "departmentChannel")
+    public ManagedChannel departmentChannel() {
+        return ManagedChannelBuilder.forAddress("localhost", 50054)
+                .usePlaintext()
+                .build();
+    }
 }

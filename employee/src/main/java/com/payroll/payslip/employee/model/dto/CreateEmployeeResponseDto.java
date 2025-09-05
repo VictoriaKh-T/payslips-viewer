@@ -8,4 +8,5 @@ public record CreateEmployeeResponseDto(
         LocalDate employmentDate,
         LocalDate dismissDate,
         Long personId,
+        Long departmentId,
         Long organizationId) {}

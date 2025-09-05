@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS public.departments
+(
+    id BIGINT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);

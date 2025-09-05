@@ -37,6 +37,9 @@ public class EmployeeEntity {
     private Long organizationId;
 
     @NonNull
+    private Long departmentId;
+
+    @NonNull
     private Long personId;
 
     @Column(nullable = false)
