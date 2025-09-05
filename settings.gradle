@@ -10,6 +10,7 @@ rootProject.name = 'payslip'
 
 include('person')
 include('organization')
+include('department')
 include('employee')
 include('gRPC-proto')
 include('gRPC-client')
@@ -34,3 +35,4 @@ dependencyResolutionManagement {
         }
     }
 }
+include 'department'

@@ -1,0 +1,10 @@
+@startuml
+'https://plantuml.com/ie-diagram
+
+entity "department" as org {
+* PK: id: varchar
+--
+* name: varchar
+* organization_id: varchar
+}
+@enduml

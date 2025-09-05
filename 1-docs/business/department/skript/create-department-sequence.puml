@@ -1,0 +1,20 @@
+@startuml
+
+' Actor
+actor "DepartmentService" as DS
+participant "Department Service" as S
+database "Department" as O
+
+
+' Create New Organization
+DS -> S: CreateDepartmentRequest
+S -> O: find department
+
+S-> S: validate data
+S-> O: create department
+
+O -> S:department
+
+S -> DS: CreateDepartmentResponse
+
+@enduml

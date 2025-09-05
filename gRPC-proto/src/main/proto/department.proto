@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package com.payroll.payslip.proto;
+
+option java_multiple_files = true;
+option java_package = "com.payroll.payslip.proto";
+
+message Department {
+  int64 id = 1;
+  string name = 2;
+}
+
+message GetDepartmentRequest {
+  int64 id = 1;
+}
+
+message GetDepartmentResponse {
+  int64 id = 1;
+  string name = 2;
+}
+
+service DepartmentService {
+  rpc GetDepartment(GetDepartmentRequest) returns (GetDepartmentResponse);
+}

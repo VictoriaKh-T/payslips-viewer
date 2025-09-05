@@ -12,8 +12,6 @@ import org.mapstruct.factory.Mappers;
 public interface EmployeeDtoToEntityMapper {
     EmployeeDtoToEntityMapper INSTANCE = Mappers.getMapper(EmployeeDtoToEntityMapper.class);
 
-    EmployeeEntity createEmployeeResponseToEntity(CreateEmployeeResponseDto response);
-
     CreateEmployeeResponseDto mapToCreateResponse(EmployeeEntity entity);
 
     UpdateEmployeeResponse mapToUpdateResponse(EmployeeEntity entity);
