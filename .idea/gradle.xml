@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/gRPC-proto" />
             <option value="$PROJECT_DIR$/organization" />
             <option value="$PROJECT_DIR$/person" />
+            <option value="$PROJECT_DIR$/salaryslip" />
           </set>
         </option>
       </GradleProjectSettings>

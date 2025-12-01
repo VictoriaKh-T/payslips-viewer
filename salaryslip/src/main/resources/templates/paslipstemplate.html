@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Payslip</title>
+</head>
+<body>
+<h2>Payslip for <span th:text="${employeeName}"></span></h2>
+
+<p>Employee ID: <span th:text="${employeeId}"></span></p>
+<p>Period: <span th:text="${period}"></span></p>
+
+<h3>Salary details</h3>
+<ul>
+    <li>Base salary: <span th:text="${baseSalary}"></span></li>
+    <li>Tax: <span th:text="${tax}"></span></li>
+    <li>Net salary: <span th:text="${netSalary}"></span></li>
+</ul>
+
+<h3>Work details</h3>
+<ul>
+    <li>Hours worked: <span th:text="${hoursWorked}"></span></li>
+    <li>Hour rate: <span th:text="${hourRate}"></span></li>
+</ul>
+
+<div th:if="${extras != null}">
+    <h3>Additional items</h3>
+    <ul>
+        <li th:each="entry : ${extras}">
+            <span th:text="${entry.key}"></span>:
+            <span th:text="${entry.value}"></span>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>
