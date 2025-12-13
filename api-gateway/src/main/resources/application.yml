@@ -22,6 +22,12 @@ spring:
             - Path=/organizations/**
           filters:
             - RewritePath=/organizations/(?<segment>.*), /${segment}
+        - id: salaryslip
+          uri: http://localhost:8084
+          predicates:
+            - Path=/payslips/**
+          filters:
+            - RewritePath=/payslips/(?<segment>.*), /${segment}
 
     config:
       enabled: false
