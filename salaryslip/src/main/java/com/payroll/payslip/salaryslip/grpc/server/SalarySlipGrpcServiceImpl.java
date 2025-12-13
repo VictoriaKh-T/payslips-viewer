@@ -5,10 +5,10 @@ import com.payroll.payslip.salaryslip.service.SalarySlipService;
 import net.devh.boot.grpc.server.service.GrpcService;
 
 @GrpcService
-public class SalarySlipServiceImpl extends SalarySlipDataServiceGrpc.SalarySlipDataServiceImplBase {
+public class SalarySlipGrpcServiceImpl extends SalarySlipDataServiceGrpc.SalarySlipDataServiceImplBase {
     private final SalarySlipService salarySlipService;
 
-    public SalarySlipServiceImpl(SalarySlipService salarySlipService) {
+    public SalarySlipGrpcServiceImpl(SalarySlipService salarySlipService) {
         this.salarySlipService = salarySlipService;
     }
 }

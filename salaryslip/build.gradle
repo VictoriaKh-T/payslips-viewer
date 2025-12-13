@@ -22,6 +22,7 @@ def spotlessVersion = "7.0.0"
 dependencies {
 //<editor-fold desc="Spring Boot dependencies">
     implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation "org.springdoc:springdoc-openapi-ui:1.8.0"
@@ -58,8 +59,7 @@ dependencies {
 //<editor-fold desc="checkstyle">
     implementation 'com.google.googlejavaformat:google-java-format:1.24.0'
 //</editor-fold>
-
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'tools.jackson.core:jackson-databind:3.0.3'
 
 //<editor-fold desc=grpc>
     implementation(libs.grpcApi)

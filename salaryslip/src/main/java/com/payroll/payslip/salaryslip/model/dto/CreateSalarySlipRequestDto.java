@@ -1,14 +1,14 @@
 package com.payroll.payslip.salaryslip.model.dto;
 
+import java.util.Map;
 import lombok.Data;
 
-import java.util.Map;
-
 @Data
-public class PayslipJsonDTO {
+public class CreateSalarySlipRequestDto {
     private Long employeeId;
     private String employeeName;
-    private String period;
+    private String monthOfYear;
+    private int year;
 
     private Double baseSalary;
     private Double tax;
@@ -17,5 +17,4 @@ public class PayslipJsonDTO {
     private Integer hoursWorked;
     private Double hourRate;
     private Map<String, Double> extras;
-
 }

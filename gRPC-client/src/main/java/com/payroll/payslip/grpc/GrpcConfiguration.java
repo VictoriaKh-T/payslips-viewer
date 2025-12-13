@@ -35,4 +35,11 @@ public class GrpcConfiguration {
                 .usePlaintext()
                 .build();
     }
+
+    @Bean(name = "salarySlipChannel")
+    public ManagedChannel salarySlipChannel() {
+        return ManagedChannelBuilder.forAddress("localhost", 50055)
+                .usePlaintext()
+                .build();
+    }
 }
