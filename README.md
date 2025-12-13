@@ -1,12 +1,20 @@
 # Payslip Platform
 
-_Payslip Platform_ is a solution  for viewing payslips. 
+Payslip Platform is a backend system for managing and viewing employee payslips.
+The system allows uploading, storing, and displaying salary slips for employees by period.
 
-A microservice architecture was used to develop the platform
+The project is implemented using a microservice architecture to explore service boundaries,
+inter-service communication, and future extensibility.
 
-This platform is a great addition tool for payroll management.
+## Architecture Notes
 
-## Project Structure 
+A microservice architecture was chosen intentionally to practice domain separation,
+inter-service communication, and independent service evolution.
+
+For an initial production MVP, a modular monolith could be a simpler and more pragmatic choice.
+This trade-off is acknowledged, and the current architecture prioritizes learning and architectural exploration.
+
+## Project Structure
 * Payslip_platform
   * **documentation** -- contains all documentation and diagrams of the project 
   * **library** -- contains addition library
@@ -14,7 +22,7 @@ This platform is a great addition tool for payroll management.
      - **authorization** --  handles user authentication and authorization
      - **employee** -- manages employee data
      - **organization** -- manages organization data
-     - **payslip** --downloading and viewing payslips
+     - **salarySLip** --downloading and viewing payslips
      - **person** -- manages person data
 
 ## Dependencies
